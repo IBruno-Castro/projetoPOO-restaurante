@@ -8,8 +8,8 @@ public abstract class prato extends itens implements codificavel {
     public prato () {
     }
 
-    public prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto) {
-        super(nome, precoUnitario, precoDeCusto);
+    public prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<itens> listaDeItens) {
+        super(nome, precoUnitario, precoDeCusto, listaDeItens);
         this.descricao = descricao;
         this.tempoPreparo = tempoPreparo;
     }
@@ -33,10 +33,6 @@ public abstract class prato extends itens implements codificavel {
 
     public void setTempoPreparo(double tempoPreparo) {
         this.tempoPreparo = tempoPreparo;
-    }
-
-    public void setPrecoUnitario(double precoUnitario) {
-        this.precoUnitario = precoUnitario;
     }
 
     public ArrayList<ingredientes> getListaIngredientes() {

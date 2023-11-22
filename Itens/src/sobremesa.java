@@ -6,9 +6,8 @@ public class sobremesa extends prato implements codificavel {
     public sobremesa () {
     }
 
-    public sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<itens> listaAtual) {
-        super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto);
-        this.codigo = geradorCodigo(listaAtual);
+    public sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<itens> listaDeItens) {
+        super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto, listaDeItens);
         this.nroCalorias = nroCalorias;
     }
 
@@ -31,10 +30,11 @@ public class sobremesa extends prato implements codificavel {
         mostrarIngredientes();
     }
 
-    //implementar gerador de código aqui com IF pra identificar o TIPO na lista GENÉRICA
-    public String geradorCodigo (ArrayList<itens> listaAtual) {
-        String codigo = null;
+    public double getNroCalorias() {
+        return nroCalorias;
+    }
 
-        return codigo;
+    public void setNroCalorias(double nroCalorias) {
+        this.nroCalorias = nroCalorias;
     }
 }
