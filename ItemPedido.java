@@ -1,4 +1,4 @@
-public class ItemPedido {
+public class ItemPedido{
     private Item item;
     private int qtd;
 
