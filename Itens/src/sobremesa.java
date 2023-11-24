@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class sobremesa extends prato implements codificavel {
+public class sobremesa extends prato {
     private double nroCalorias;
 
     public sobremesa () {

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class itens implements codificavel {
+public abstract class itens {
     protected String nome;
     protected double precoUnitario;
     protected double precoCusto;
@@ -40,7 +40,7 @@ public abstract class itens implements codificavel {
         return codigo;
     }
 
-    public String gerarCodigo(ArrayList<itens> codigosGerados) {
+    protected String gerarCodigo(ArrayList<itens> codigosGerados) {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String numeros = "0123456789";
 

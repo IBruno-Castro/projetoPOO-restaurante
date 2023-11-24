@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public abstract class prato extends itens implements codificavel {
+public abstract class prato extends itens {
     protected ArrayList<ingredientes> listaIngredientes = new ArrayList<>();
     protected String descricao;
     protected double tempoPreparo;
