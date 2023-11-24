@@ -20,9 +20,9 @@ public class Pedido {
         this.cozinheiro = cozinheiro;
     }
 
-    public void realizarPedido() {
+    /*public void realizarPedido() {
         this.garcom.registrarPedido(this);
-    }
+    }*/
 
     public void confirmarPagamento() {
         this.horaPagamento = LocalDateTime.now();
@@ -30,7 +30,7 @@ public class Pedido {
 
     public void calcularValorTotal() {
         for (ItemPedido item : itens) {
-            this.valorTotal += item.getItem().getPrecoUni() * item.getQtd();
+            //this.valorTotal += item./getItem().getPrecoUni() * item.getQtd();
         }
     }
 
