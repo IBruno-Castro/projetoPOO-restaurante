@@ -1,19 +1,17 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class bebida extends itens implements codificavel{
+public class bebida extends itens {
     private String tipoEmbalagem;
     private String tamanhoEmbalagem;
 
     public bebida () {
     }
-    public bebida(String nome, String tipoEmbalagem, String tamanhoEmbalagem, double precoUnitario, double precoCusto, ArrayList<itens> listaAtual) {
-        this.nome = nome;
+
+    public bebida(String nome, double precoUnitario, double precoCusto, ArrayList<itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) {
+        super(nome, precoUnitario, precoCusto, listaDeItens);
         this.tipoEmbalagem = tipoEmbalagem;
         this.tamanhoEmbalagem = tamanhoEmbalagem;
-        this.precoUnitario = precoUnitario;
-        this.precoCusto = precoCusto;
-        codigo = geradorCodigo(listaAtual);
     }
 
     public String getNome() {
@@ -28,14 +26,6 @@ public class bebida extends itens implements codificavel{
         return tamanhoEmbalagem;
     }
 
-    public double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public double getPrecoCusto() {
-        return precoCusto;
-    }
-
     public void setTipoEmbalagem(String tipoEmbalagem) {
         this.tipoEmbalagem = tipoEmbalagem;
     }
@@ -44,18 +34,12 @@ public class bebida extends itens implements codificavel{
         this.tamanhoEmbalagem = tamanhoEmbalagem;
     }
 
-    public void setPrecoUnitario(double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public void setPrecoCusto(double precoCusto) {
-        this.precoCusto = precoCusto;
-    }
-
-    //implementar gerador de código aqui com IF pra identificar o TIPO na lista GENÉRICA
-    public String geradorCodigo (ArrayList<itens> listaAtual) {
-        String codigo = null;
-
-        return codigo;
+    public void mostrarBebida () {
+        System.out.println("\nNome: " + getNome());
+        System.out.println("Tamanho embalagem: " + getTamanhoEmbalagem());
+        System.out.println("Código: " + getCodigo());
+        System.out.println("Tipo embalagem: " + getTipoEmbalagem());
+        System.out.println("Preço unitário: " + getPrecoUnitario());
+        System.out.println("Preço de custo: " + getPrecoCusto());
     }
 }

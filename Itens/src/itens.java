@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class itens {
     protected String nome;
     protected double precoUnitario;
@@ -6,10 +9,11 @@ public abstract class itens {
 
     public itens () {
     }
-    public itens(String nome, double precoUnitario, double precoCusto) {
+    public itens(String nome, double precoUnitario, double precoCusto, ArrayList<itens> listaDeItens) {
         this.nome = nome;
         this.precoUnitario = precoUnitario;
         this.precoCusto = precoCusto;
+        this.codigo = gerarCodigo(listaDeItens);
     }
 
     public String getNome() {
@@ -34,5 +38,42 @@ public abstract class itens {
 
     public String getCodigo() {
         return codigo;
+    }
+
+    protected String gerarCodigo(ArrayList<itens> codigosGerados) {
+        String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numeros = "0123456789";
+
+        // Verificando o último código gerado (se existir) para gerar o próximo
+        String ultimoCodigoGerado;
+        if (codigosGerados.isEmpty()) return "AAA00";
+        else ultimoCodigoGerado = codigosGerados.get(codigosGerados.size() - 1).getCodigo();
+
+        // Verificando se o último código gerado é ZZZ99, se sim, retorna o mesmo código FAZER UM ERRO ACONTECER AQUI
+        if (ultimoCodigoGerado.equals("ZZZ99")) {
+            return ultimoCodigoGerado;
+        }
+
+        char[] codigoArray = ultimoCodigoGerado.toCharArray();
+
+        // Gerando o próximo código de forma crescente
+        for (int i = 4; i >= 0; i--) {
+            if ((codigoArray[i] != '9') && (codigoArray[i] != 'Z')) {
+                if (i >= 3) {
+                    codigoArray[i] = numeros.charAt(numeros.indexOf(codigoArray[i]) + 1);
+                } else {
+                    codigoArray[i] = letras.charAt(letras.indexOf(codigoArray[i]) + 1);
+                    if (codigoArray[i] == 'A') {
+                        codigoArray[i] = 'A';
+                    }
+                }
+                break;
+            } else {
+                if (i >= 3) codigoArray[i] = '0';
+                else codigoArray[i] = 'A';
+            }
+        }
+
+        return String.valueOf(codigoArray);
     }
 }

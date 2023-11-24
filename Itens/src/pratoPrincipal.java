@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 
-public class pratoPrincipal extends prato implements codificavel {
+public class pratoPrincipal extends prato {
     public pratoPrincipal() {
     }
 
-    public pratoPrincipal(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<itens> listaAtual) {
-        super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto);
-        codigo = geradorCodigo(listaAtual);
+    public pratoPrincipal(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<itens> listaDeItens) {
+        super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto, listaDeItens);
     }
 
     public void mostrarIngredientes () {
@@ -25,12 +24,5 @@ public class pratoPrincipal extends prato implements codificavel {
         System.out.println("Preço unitário: " + getPrecoUnitario());
         System.out.println("Preço de custo: " + getPrecoCusto());
         mostrarIngredientes();
-    }
-
-    //implementar gerador de código aqui com IF pra identificar o TIPO na lista GENÉRICA
-    public String geradorCodigo (ArrayList<itens> listaAtual) {
-        String codigo = null;
-        
-        return codigo;
     }
 }
