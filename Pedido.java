@@ -12,24 +12,21 @@ public class Pedido {
     private Garcom garcom;
     private Cozinheiro cozinheiro;
 
-    public Pedido(ArrayList<ItemPedido> itens, Garcom garcom, Cozinheiro cozinheiro) {
+    public Pedido(ArrayList<ItemPedido> itens, String formaPag, Garcom garcom, Cozinheiro cozinheiro) {
         this.itens = new ArrayList<>();
         this.valorTotal = 0;
         this.dataPedido = LocalDateTime.now();
         this.horaPagamento = null;
-        this.formaPag = null;
+        this.formaPag = formaPag;
         this.garcom = garcom;
         this.cozinheiro = cozinheiro;
     }
 
 /*
- * Função realizar pedido recebe a ArrayList de itens que o garçom selecionou de acordo com o cliente e a forma de pagamento,
- * a função registra o pedido no sistema emitindo a hora quando há confirmação de pagamento.
+ * Função realizar pedido recebe a ArrayList de itens e registra o pedido no sistema emitindo a hora quando há confirmação de pagamento.
  */
-    public void realizarPedido(ArrayList<ItemPedido> itens, String formaPag) {
-        //this.garcom.registrarPedido(); provavelmente vamos mudar 
-        //this.cozinheiro.registrarPedido();
-        this.formaPag = formaPag;
+    public void realizarPedido(ArrayList<ItemPedido> itens) {
+        //this.garcom.registrarPedido(); vamos mudar quando for fazer a classe restaurante
         if (this.formaPag.equals("Dinheiro") || this.formaPag.equals("Cartão") || this.formaPag.equals("PIX")) {
             this.confirmarPagamento();
         } /*else {
