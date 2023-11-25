@@ -2,11 +2,11 @@ import java.util.Date;
 
 public abstract class Funcionario {
     protected String nome;
+    protected String cpf;
+    protected String rg;
     protected String endereco;
     protected String estadoCivil;
     protected int nroCarteiraTrabalho;
-    protected String cpf;
-    protected String rg;
     protected Date dataAdmissao;
 
     public Funcionario(){
@@ -30,4 +30,42 @@ public abstract class Funcionario {
     }
 
     public abstract float calcularSalario();
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public int getNroCarteiraTrabalho() {
+        return nroCarteiraTrabalho;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+    public Date getDataAdmissao() {
+        return dataAdmissao;
+    }
+
+    public void mostrarFuncionario(){
+        System.out.println("-- Informacoes de funcionario --");
+        System.out.println("Nome: " + nome);
+        System.out.println("CPF: " + cpf);
+        System.out.println("RG: " + rg);
+        System.out.println("Endereço: " + endereco);
+        System.out.println("Estado Civil: " + estadoCivil);
+        System.out.println("Numero da Carteira de Trabalho: " + nroCarteiraTrabalho);
+        System.out.println("Data de admissao: " + dataAdmissao.toString());
+    }
 }

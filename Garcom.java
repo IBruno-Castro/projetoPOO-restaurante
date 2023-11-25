@@ -1,8 +1,8 @@
 public class Garcom extends Funcionario{
     private float salarioBase;
     private String diaFolga;
+    
     private static float limite = 100;
-    private static float grat = 500;
 
     public Garcom(String nome, String endereco, String estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year, float salarioBase, String diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg, day, month, year);
@@ -10,14 +10,29 @@ public class Garcom extends Funcionario{
         this.diaFolga = diaFolga;
     }
 
-    @Override
     public float calcularSalario(){
-        if(/*pedidos*/ >= limite){
-            return salarioBase + grat;
-        }
-        else{
-            return salarioBase;
+        return 0;
+    }
 
-        }
+    public float getSalarioBase() {
+        return salarioBase;
+    }
+
+    public void setSalarioBase(float salarioBase) {
+        this.salarioBase = salarioBase;
+    }
+
+    public String getDiaFolga() {
+        return diaFolga;
+    }
+
+    public void setDiaFolga(String diaFolga) {
+        this.diaFolga = diaFolga;
+    }
+
+    public void mostrarFuncionario() {
+        super.mostrarFuncionario();
+        System.out.println("Salario base: " + salarioBase);
+        System.out.println("Dia de folga: " + diaFolga);
     }
 }
