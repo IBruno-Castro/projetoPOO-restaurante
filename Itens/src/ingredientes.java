@@ -1,11 +1,11 @@
-public class ingredientes {
+public class Ingredientes {
     private String nome;
     private String quantidade;
 
-    public ingredientes () {
+    public Ingredientes () {
     }
 
-    public ingredientes (String nome, String quantidade) {
+    public Ingredientes (String nome, String quantidade) {
         this.nome = nome;
         this.quantidade = quantidade;
     }

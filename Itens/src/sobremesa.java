@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
-public class sobremesa extends prato {
+public class Sobremesa extends Prato {
     private double nroCalorias;
 
-    public sobremesa () {
+    public Sobremesa () {
     }
 
-    public sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<itens> listaDeItens) {
+    public Sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<Itens> listaDeItens) {
         super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto, listaDeItens);
         this.nroCalorias = nroCalorias;
     }
 
     public void mostrarIngredientes () {
         System.out.println("\nQuantidade de ingredientes: " + getListaIngredientes().size());
-        for (ingredientes ingred : getListaIngredientes()) {
+        for (Ingredientes ingred : getListaIngredientes()) {
             System.out.println("\nNome: " + ingred.getNome());
             System.out.println("Quantidade: " + ingred.getQuantidade());
         }

@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
-public class pratoPrincipal extends prato {
-    public pratoPrincipal() {
+public class PratoPrincipal extends Prato {
+    public PratoPrincipal() {
     }
 
-    public pratoPrincipal(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<itens> listaDeItens) {
+    public PratoPrincipal(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<Itens> listaDeItens) {
         super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto, listaDeItens);
     }
 
     public void mostrarIngredientes () {
         System.out.println("\nQuantidade de ingredientes: " + getListaIngredientes().size());
-        for (ingredientes ingred : getListaIngredientes()) {
+        for (Ingredientes ingred : getListaIngredientes()) {
             System.out.println("\nNome: " + ingred.getNome());
             System.out.println("Quantidade: " + ingred.getQuantidade());
         }

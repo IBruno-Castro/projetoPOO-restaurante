@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class itens {
+public abstract class Itens {
     protected String nome;
     protected double precoUnitario;
     protected double precoCusto;
     protected String codigo;
 
-    public itens () {
+    public Itens () {
     }
-    public itens(String nome, double precoUnitario, double precoCusto, ArrayList<itens> listaDeItens) {
+    public Itens(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens) {
         this.nome = nome;
         this.precoUnitario = precoUnitario;
         this.precoCusto = precoCusto;
@@ -40,7 +40,7 @@ public abstract class itens {
         return codigo;
     }
 
-    protected String gerarCodigo(ArrayList<itens> codigosGerados) {
+    protected String gerarCodigo(ArrayList<Itens> codigosGerados) {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String numeros = "0123456789";
 

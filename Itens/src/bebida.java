@@ -1,14 +1,14 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class bebida extends itens {
+public class Bebida extends Itens {
     private String tipoEmbalagem;
     private String tamanhoEmbalagem;
 
-    public bebida () {
+    public Bebida () {
     }
 
-    public bebida(String nome, double precoUnitario, double precoCusto, ArrayList<itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) {
+    public Bebida(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) {
         super(nome, precoUnitario, precoCusto, listaDeItens);
         this.tipoEmbalagem = tipoEmbalagem;
         this.tamanhoEmbalagem = tamanhoEmbalagem;

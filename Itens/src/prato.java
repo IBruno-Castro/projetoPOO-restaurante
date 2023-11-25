@@ -1,21 +1,21 @@
 import java.util.ArrayList;
 
-public abstract class prato extends itens {
-    protected ArrayList<ingredientes> listaIngredientes = new ArrayList<>();
+public abstract class Prato extends Itens {
+    protected ArrayList<Ingredientes> listaIngredientes = new ArrayList<>();
     protected String descricao;
     protected double tempoPreparo;
 
-    public prato () {
+    public Prato () {
     }
 
-    public prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<itens> listaDeItens) {
+    public Prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<Itens> listaDeItens) {
         super(nome, precoUnitario, precoDeCusto, listaDeItens);
         this.descricao = descricao;
         this.tempoPreparo = tempoPreparo;
     }
 
     public void adicionarIngredientes (String nome, String quantidade) {
-        ingredientes temp = new ingredientes(nome, quantidade);
+        Ingredientes temp = new Ingredientes(nome, quantidade);
         listaIngredientes.add(temp);
     }
 
@@ -35,7 +35,7 @@ public abstract class prato extends itens {
         this.tempoPreparo = tempoPreparo;
     }
 
-    public ArrayList<ingredientes> getListaIngredientes() {
+    public ArrayList<Ingredientes> getListaIngredientes() {
         return listaIngredientes;
     }
 
