@@ -19,6 +19,11 @@ public abstract class Funcionario {
         this.dataAdmissao = new Date(0, 0, 0);
     }
 
+    public Funcionario(String nome, String cpf){
+        this.nome = nome;
+        this.cpf = cpf;
+    }
+
     public Funcionario(String nome, String endereco, String estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year){
         this.endereco = endereco;
         this.estadoCivil = estadoCivil;
