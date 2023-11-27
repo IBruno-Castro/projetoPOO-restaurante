@@ -51,7 +51,7 @@ public abstract class Itens {
 
         // Verificando se o último código gerado é ZZZ99, se sim, retorna o mesmo código FAZER UM ERRO ACONTECER AQUI
         if (ultimoCodigoGerado.equals("ZZZ99")) {
-            return ultimoCodigoGerado;
+            throw new ErroCodigo("LIMITE DE CÓDIGOS ATINGIDO!");
         }
 
         char[] codigoArray = ultimoCodigoGerado.toCharArray();
