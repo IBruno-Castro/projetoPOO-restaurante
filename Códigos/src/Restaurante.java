@@ -22,15 +22,15 @@ public class Restaurante implements EnumsFuncionarios{
         String x;
         do {
             System.out.println("Deseja cadastrar um garçom ou um cozinheiro?");
-            x = scanner.nextLine();
-            //x = x.toUpperCase();
+            x = scanner.next();
+            x = x.toUpperCase();
 
             System.out.println(x);
 
-            if ((x != "GARCOM") && (x != "GARÇOM") && (x != "cozinheiro")) {
+            if (!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO")) {
                 System.out.println("Entrada inválida!\n");
             }
-        } while(x != "GARCOM" && x != "GARÇOM" && x != "cozinheiro");
+        } while(!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO"));
 
         System.out.printf("Digite o nome do funcionário: ");
         String nome = scanner.nextLine();
