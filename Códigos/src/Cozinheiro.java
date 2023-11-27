@@ -7,8 +7,8 @@ public class Cozinheiro extends Funcionario{
     private static float pratoP = 30;
     private static float sobremesa = 20;
 
-    public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year){
-        super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg, day, month, year);
+    public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
+        super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
     }
 
     public float calcularSalario() {

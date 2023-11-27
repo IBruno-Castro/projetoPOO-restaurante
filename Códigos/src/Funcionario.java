@@ -24,14 +24,14 @@ public abstract class Funcionario implements EnumsFuncionarios{
         this.cpf = cpf;
     }
 
-    public Funcionario(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year){
+    public Funcionario(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         this.endereco = endereco;
         this.estadoCivil = estadoCivil;
         this.nome = nome;
         this.nroCarteiraTrabalho = nroCarteiraTrabalho;
         this.cpf = cpf;
         this.rg = rg;
-        this.dataAdmissao = LocalDateTime.of(year,month,day,0,0);
+        this.dataAdmissao = LocalDateTime.now();
     }
 
     public abstract float calcularSalario();

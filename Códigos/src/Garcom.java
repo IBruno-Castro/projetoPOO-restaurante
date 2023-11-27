@@ -1,13 +1,14 @@
 import java.lang.IllegalArgumentException;
+import java.time.LocalDateTime;
 
 public class Garcom extends Funcionario implements EnumsFuncionarios{
-    private float salarioBase;
+    private double salarioBase;
     private EnumsFuncionarios.DiaSemana diaFolga;
     
     private static float limite = 100;
 
-    public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year, float salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
-        super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg, day, month, year);
+    public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
+        super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
         this.salarioBase = salarioBase;
         this.diaFolga = diaFolga;
     }
@@ -16,13 +17,13 @@ public class Garcom extends Funcionario implements EnumsFuncionarios{
         return 0;
     }
 
-    public float getSalarioBase() {
+    public double getSalarioBase() {
         return salarioBase;
     }
 
     public void setSalarioBase(float salarioBase) {
         if(salarioBase < 1320){
-            throw new IllegalArgumentException("Valor abaixo do salário mínimo");
+            throw new IllegalArgumentException("Valor abaixo do salário mínimo!");
         } else {
             this.salarioBase = salarioBase;
         }
