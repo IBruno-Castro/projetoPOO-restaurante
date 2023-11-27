@@ -22,6 +22,7 @@ public class Pedido {
 
     /*public void realizarPedido() {
         this.garcom.registrarPedido(this);
+        this.cozinheiro.registrarPedido(this);
     }*/
 
     public void confirmarPagamento() {

@@ -1,23 +1,65 @@
-public class Garcom extends Funcionario{
-    private float salarioBase;
-    private String diaFolga;
-    private static float limite = 100;
-    private static float grat = 500;
+import java.lang.IllegalArgumentException;
 
-    public Garcom(String nome, String endereco, String estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year, float salarioBase, String diaFolga){
+public class Garcom extends Funcionario implements EnumsFuncionarios{
+    private float salarioBase;
+    private EnumsFuncionarios.DiaSemana diaFolga;
+    
+    private static float limite = 100;
+
+    public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, int day, int month, int year, float salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg, day, month, year);
         this.salarioBase = salarioBase;
         this.diaFolga = diaFolga;
     }
 
-    @Override
     public float calcularSalario(){
-        if(/*pedidos*/ >= limite){
-            return salarioBase + grat;
-        }
-        else{
-            return salarioBase;
+        return 0;
+    }
 
+    public float getSalarioBase() {
+        return salarioBase;
+    }
+
+    public void setSalarioBase(float salarioBase) {
+        if(salarioBase < 1320){
+            throw new IllegalArgumentException("Valor abaixo do salário mínimo");
+        } else {
+            this.salarioBase = salarioBase;
+        }
+    }
+
+    public EnumsFuncionarios.DiaSemana getDiaFolga() {
+        return diaFolga;
+    }
+
+    public void setDiaFolga(EnumsFuncionarios.DiaSemana diaFolga) {
+        this.diaFolga = diaFolga;
+    }
+
+    public void mostrarFuncionario() {
+        super.mostrarFuncionario();
+        System.out.println("Salario base: " + salarioBase);
+        System.out.println("Dia de folga: " + mostrarDia());
+    }
+
+    public String mostrarDia(){
+        switch (diaFolga) {
+            case DOMINGO:
+                return "Domingo";
+            case SEGUNDA:
+                return "Segunda-feira";
+            case TERCA:
+                return "Terça-feira";
+            case QUARTA:
+                return "Quarta-feira";
+            case QUINTA:
+                return "Quinta-feira";
+            case SEXTA:
+                return "Sexta-feira";
+            case SABADO:
+                return "Sábado";
+            default:
+                return "Dia inválido";
         }
     }
 }
