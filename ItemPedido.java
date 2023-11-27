@@ -6,12 +6,21 @@ public class ItemPedido{
         this.item = item;
         this.qtd = qtd;
     }
-    
-    public int getQtd() {
+
+    public Itens getItem(){
+        return item;
+    }
+
+    public int getQtd(){
         return qtd;
     }
 
-    public Itens getItem() {
-        return item;
+    public void setItem(Itens item){
+        this.item = item;
     }
+
+    public void setQtd(int qtd){
+        this.qtd = qtd;
+    }
+
 }
