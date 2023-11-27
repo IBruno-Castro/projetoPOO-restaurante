@@ -22,7 +22,7 @@ public class Restaurante implements EnumsFuncionarios{
         String x;
         do {
             System.out.println("Deseja cadastrar um garçom ou um cozinheiro?");
-            x = scanner.next();
+            x = scanner.nextLine();
             x = x.toUpperCase();
 
             System.out.println(x);
@@ -34,19 +34,24 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.printf("Digite o nome do funcionário: ");
         String nome = scanner.nextLine();
+        //scanner.nextLine();
         System.out.printf("\nDigite o CPF do funcionário: ");
         String cpf = scanner.nextLine();
+        //scanner.nextLine();
         System.out.printf("\nDigite o RG do funcionário: ");
         String rg = scanner.nextLine();
+        //scanner.nextLine();
         System.out.printf("\nDigite o endereço do funcionário (Rua ..., número): ");
-        String end = scanner.next();
+        String end = scanner.nextLine();
+        //scanner.nextLine();
         System.out.println("\nDigite o estado civil do funcionário: ");
-        String ec = scanner.next();
-        ec.toUpperCase();
+        String ec = scanner.nextLine();
+        //scanner.nextLine();
+        ec = ec.toUpperCase();
         System.out.println("\nDigite o número da carteira de trabalho do funcionário: ");
         int nroC = scanner.nextInt();
 
-        if(x == "GARCOM" || x == "GARÇOM"){
+        if(x.equals("GARCOM") || x.equals("GARÇOM")){
             System.out.println("\nDigite o salário base do garçom: ");
             double sal = scanner.nextDouble();
             System.out.println("\nSelecione o dia de folga do garçom: ");
@@ -69,7 +74,9 @@ public class Restaurante implements EnumsFuncionarios{
     }
 
     public static EnumsFuncionarios.EstadoCivil converterEstadoCivil(String ec){
+        System.out.println(ec);
         if(Objects.equals(ec, "SOLTEIRO") || Objects.equals(ec, "SOLTEIRA")){
+            System.out.println("aoba");
             return EstadoCivil.SOLTEIRA;
         }
         if(Objects.equals(ec, "CASADO") || Objects.equals(ec, "CASADA")){
