@@ -8,7 +8,7 @@ public class Bebida extends Itens {
     public Bebida () {
     }
 
-    public Bebida(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) {
+    public Bebida(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) throws ErroCodigoException {
         super(nome, precoUnitario, precoCusto, listaDeItens);
         this.tipoEmbalagem = tipoEmbalagem;
         this.tamanhoEmbalagem = tamanhoEmbalagem;

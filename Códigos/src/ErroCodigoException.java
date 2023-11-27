@@ -1,5 +1,5 @@
-public class ErroCodigo extends RuntimeException {
-    public ErroCodigo (String message) {
+public class ErroCodigoException extends IllegalAccessException {
+    public ErroCodigoException (String message) {
         super(message);
     }
 }

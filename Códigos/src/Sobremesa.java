@@ -6,7 +6,7 @@ public class Sobremesa extends Prato {
     public Sobremesa () {
     }
 
-    public Sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<Itens> listaDeItens) {
+    public Sobremesa (String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, double nroCalorias, ArrayList<Itens> listaDeItens) throws ErroCodigoException {
         super(nome, descricao, tempoPreparo, precoUnitario, precoDeCusto, listaDeItens);
         this.nroCalorias = nroCalorias;
     }

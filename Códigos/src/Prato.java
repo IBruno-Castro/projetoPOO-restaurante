@@ -8,7 +8,7 @@ public abstract class Prato extends Itens {
     public Prato () {
     }
 
-    public Prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<Itens> listaDeItens) {
+    public Prato(String nome, String descricao, double tempoPreparo, double precoUnitario, double precoDeCusto, ArrayList<Itens> listaDeItens) throws ErroCodigoException {
         super(nome, precoUnitario, precoDeCusto, listaDeItens);
         this.descricao = descricao;
         this.tempoPreparo = tempoPreparo;

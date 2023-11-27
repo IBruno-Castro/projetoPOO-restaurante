@@ -1,8 +1,8 @@
 public class ItemPedido{
-    private Item item;
+    private Itens item;
     private int qtd;
 
-    public ItemPedido(Item item, int qtd){
+    public ItemPedido(Itens item, int qtd){
         this.item = item;
         this.qtd = qtd;
     }

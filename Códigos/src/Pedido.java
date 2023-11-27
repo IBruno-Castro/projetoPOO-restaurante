@@ -29,11 +29,11 @@ public class Pedido {
         this.horaPagamento = LocalDateTime.now();
     }
 
-    public void calcularValorTotal() {
+    /*public void calcularValorTotal() {
         for (ItemPedido item : itens) {
             //this.valorTotal += item./getItem().getPrecoUni() * item.getQtd();
         }
-    }
+    }*/
 
     public void adicionarItem(ItemPedido item) {
         this.itens.add(item);

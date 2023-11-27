@@ -9,7 +9,7 @@ public abstract class Itens {
 
     public Itens () {
     }
-    public Itens(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens) {
+    public Itens(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens) throws ErroCodigoException {
         this.nome = nome;
         this.precoUnitario = precoUnitario;
         this.precoCusto = precoCusto;
@@ -40,7 +40,7 @@ public abstract class Itens {
         return codigo;
     }
 
-    protected String gerarCodigo(ArrayList<Itens> codigosGerados) {
+    protected String gerarCodigo(ArrayList<Itens> codigosGerados) throws ErroCodigoException {
         String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String numeros = "0123456789";
 
@@ -50,9 +50,7 @@ public abstract class Itens {
         else ultimoCodigoGerado = codigosGerados.get(codigosGerados.size() - 1).getCodigo();
 
         // Verificando se o último código gerado é ZZZ99, se sim, retorna o mesmo código FAZER UM ERRO ACONTECER AQUI
-        if (ultimoCodigoGerado.equals("ZZZ99")) {
-            throw new ErroCodigo("LIMITE DE CÓDIGOS ATINGIDO!");
-        }
+        if (ultimoCodigoGerado.equals("ZZZ99")) throw new ErroCodigoException("LIMITE DE CÓDIGOS ATINGIDO!");
 
         char[] codigoArray = ultimoCodigoGerado.toCharArray();
 
