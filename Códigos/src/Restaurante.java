@@ -41,7 +41,7 @@ public class Restaurante implements EnumsFuncionarios{
                         itens.add(cadastrarItens(itens, ingredientes));
                         itens.get(itens.size() - 1).mostrarItem();
                     } catch (ErroCodigoException e) {
-                        System.out.println(e);
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 4:
