@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Restaurante implements EnumsFuncionarios{
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
+    static SoundTrack sound = new SoundTrack();
     public static void main(String[] args){
 
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
@@ -15,7 +16,7 @@ public class Restaurante implements EnumsFuncionarios{
         int opcao;
 
         do {
-
+            sound.MusicFundo();
             System.out.println("BEM-VINDO AO RESTAURANTE\n");
             System.out.println("============== Menu ==============");
             System.out.println("1. Cadastrar Funcionário");
