@@ -29,15 +29,18 @@ public class Restaurante implements EnumsFuncionarios{
             switch (opcao) {
                 case 1:
                     funcionarios.add(cadastrarFuncionario());
+                    funcionarios.get(funcionarios.size() - 1).mostrarFuncionario();
                     break;
                 case 2:
                     ingredientes.add(cadastrarIngrediente());
+                    ingredientes.get(ingredientes.size() - 1).mostrarIngrediente();
                     break;
                 case 3:
                     try {
                         itens.add(cadastrarItens(itens, ingredientes));
+                        itens.get(itens.size() - 1).mostrarItem();
                     } catch (ErroCodigoException e) {
-                        e.getMessage();
+                        System.out.println(e);
                     }
                     break;
                 case 4:
@@ -210,7 +213,7 @@ public class Restaurante implements EnumsFuncionarios{
             if (x.equals("PRATO PRINCIPAL")) {
                 item = new PratoPrincipal(nome, descricao, tempoPreparo, precoUnitario, precoCusto, itens);
             } else{
-                System.out.print("Tempo de preparo: ");
+                System.out.print("Número de calorias: ");
                 double nroCal = scanner.nextDouble();
                 scanner.nextLine();
 
