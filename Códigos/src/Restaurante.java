@@ -38,6 +38,27 @@ public class Restaurante implements EnumsFuncionarios{
                 case 3:
                     try {
                         itens.add(cadastrarItens(itens, ingredientes));
+
+                        if(itens.get(itens.size() - 1) instanceof Prato){
+                            String c;
+                            int op;
+                            do{
+                                System.out.println("Lista ingredientes: ");
+                                for (int index = 0; index < ingredientes.size(); index++) {
+                                    System.out.print(index + ".");
+                                    ingredientes.get(index).mostrarIngrediente();
+                                }
+
+                                System.out.println("Digite o index do ingrediente para adicionar: ");
+                                op = scanner.nextInt();
+                                scanner.nextLine();
+                                ((Prato) itens.get(itens.size() - 1)).adicionarIngredientes(ingredientes.get(op));
+
+                                System.out.println("Quer adicionar outro ingrediente? s/n");
+                                c = scanner.nextLine();
+                            } while(!c.equals("n"));
+                        }
+
                         itens.get(itens.size() - 1).mostrarItem();
                     } catch (ErroCodigoException e) {
                         System.out.println(e);
@@ -102,9 +123,7 @@ public class Restaurante implements EnumsFuncionarios{
             double sal = scanner.nextDouble();
             scanner.nextLine();
             System.out.println("\nSelecione o dia de folga do garçom: ");
-            System.out.println("""
-                    1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado
-                    """);
+            System.out.println("1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado");
 
             int folga = scanner.nextInt();
 
@@ -168,7 +187,7 @@ public class Restaurante implements EnumsFuncionarios{
     }
 
     public static Itens cadastrarItens(ArrayList<Itens> itens, ArrayList<Ingredientes> ingredientes) throws ErroCodigoException{
-        System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS\n");
+        System.out.println("CADASTRAMENTO DE ITENS\n");
         Itens item = null;
 
         sleep.Sleeping(1000);

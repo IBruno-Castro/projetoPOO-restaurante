@@ -23,7 +23,7 @@ public class Cozinheiro extends Funcionario{
     public void mostrarPratos(){
         System.out.println("Lista de pratos preparados por " + nome);
         for (Prato prato : listaPratos) {
-            prato.mostrarPrato();
+            prato.mostrarItem();
         }
     }
 
