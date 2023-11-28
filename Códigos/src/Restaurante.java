@@ -14,6 +14,7 @@ public class Restaurante implements EnumsFuncionarios{
         int opcao;
 
         do {
+
             System.out.println("BEM-VINDO AO RESTAURANTE\n");
             System.out.println("============== Menu ==============");
             System.out.println("1. Cadastrar Funcionário");
@@ -66,7 +67,6 @@ public class Restaurante implements EnumsFuncionarios{
         do {
             System.out.println("Deseja cadastrar um garçom ou um cozinheiro?");
             x = scanner.nextLine();
-            scanner.nextLine();
             x = x.toUpperCase();
 
             if (!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO")) {
@@ -76,20 +76,20 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("\nDigite o nome do funcionário: ");
         String nome = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.print("\nDigite o CPF do funcionário: ");
         String cpf = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.print("\nDigite o RG do funcionário: ");
         String rg = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.print("\nDigite o endereço do funcionário (Rua ..., número): ");
         String end = scanner.nextLine();
-        scanner.nextLine();
+
         System.out.print("\nDigite o estado civil do funcionário: ");
         String ec = scanner.nextLine();
-        scanner.nextLine();
         ec = ec.toUpperCase();
+
         System.out.print("\nDigite o número da carteira de trabalho do funcionário: ");
         int nroC = scanner.nextInt();
         scanner.nextLine();
@@ -98,11 +98,11 @@ public class Restaurante implements EnumsFuncionarios{
             System.out.println("\nDigite o salário base do garçom: ");
             double sal = scanner.nextDouble();
             scanner.nextLine();
+
             System.out.println("\nSelecione o dia de folga do garçom: ");
             System.out.println("""
                     1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado
                     """);
-
             int folga = scanner.nextInt();
 
             return new Garcom(nome, end, converterEstadoCivil(ec), nroC, cpf, rg, sal, converterFolga(folga));
@@ -156,10 +156,9 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("\nDigite o nome do ingrediente: ");
         String nome = scanner.nextLine();
-        scanner.nextLine();
+        
         System.out.print("\nDigite a quantidade do ingrediente: (Ex: 1kg, 1L, 1 unidade)");
         String qtd = scanner.nextLine();
-        scanner.nextLine();
 
         return new Ingredientes(nome, qtd);
     }
@@ -178,7 +177,6 @@ public class Restaurante implements EnumsFuncionarios{
         do {
             System.out.println("Deseja cadastrar um prato principal, sobremesa ou bebida?");
             x = scanner.nextLine();
-            scanner.nextLine();
             x = x.toUpperCase();
 
             if (!x.equals("BEBIDA") && !x.equals("PRATO PRINCIPAL") && !x.equals("SOBREMESA")) {
@@ -188,7 +186,6 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("Nome do item: ");
         String nome = scanner.nextLine();
-        scanner.nextLine();
 
         System.out.print("Preço unitário: ");
         double precoUnitario = scanner.nextDouble();
@@ -201,7 +198,6 @@ public class Restaurante implements EnumsFuncionarios{
         if (x.equals("PRATO PRINCIPAL") || x.equals("SOBREMESA")) {
             System.out.print("Descrição: ");
             String descricao = scanner.nextLine();
-            scanner.nextLine();
 
             System.out.print("Tempo de preparo: ");
             double tempoPreparo = scanner.nextDouble();
@@ -219,11 +215,9 @@ public class Restaurante implements EnumsFuncionarios{
         } else {
             System.out.print("Tipo de embalagem: ");
             String tipoEmbalagem = scanner.nextLine();
-            scanner.nextLine();
 
             System.out.print("Tamanho da embalagem: ");
             String tamanhoEmbalagem = scanner.nextLine();
-            scanner.nextLine();
 
             item = new Bebida(nome, precoUnitario, precoCusto, itens, tipoEmbalagem, tamanhoEmbalagem);
         }
