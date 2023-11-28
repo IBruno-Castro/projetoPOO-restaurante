@@ -21,4 +21,9 @@ public class Ingredientes {
     public String getNome() {
         return nome;
     }
+
+    public void mostrarIngrediente() {
+        System.out.println("Nome: " + getNome());
+        System.out.println("Quantidade: " + getQuantidade());
+    }
 }

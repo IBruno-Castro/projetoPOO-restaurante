@@ -39,7 +39,16 @@ public abstract class Prato extends Itens {
         return listaIngredientes;
     }
 
-    public abstract void mostrarIngredientes ();
+    public void mostrarIngredientes() {
+        System.out.println("\nQuantidade de ingredientes: " + getListaIngredientes().size());
+        for (Ingredientes ingred : getListaIngredientes()) {
+            ingred.mostrarIngrediente();
+        }
+    }
 
-    public abstract void mostrarPrato ();
+    public void mostrarItem (){
+        super.mostrarItem();
+        System.out.println("Descrição: " + descricao);
+        System.out.println("Tempo de preparo: " + tempoPreparo);
+    }
 }

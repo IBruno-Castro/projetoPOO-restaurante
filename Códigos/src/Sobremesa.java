@@ -11,22 +11,9 @@ public class Sobremesa extends Prato {
         this.nroCalorias = nroCalorias;
     }
 
-    public void mostrarIngredientes () {
-        System.out.println("\nQuantidade de ingredientes: " + getListaIngredientes().size());
-        for (Ingredientes ingred : getListaIngredientes()) {
-            System.out.println("\nNome: " + ingred.getNome());
-            System.out.println("Quantidade: " + ingred.getQuantidade());
-        }
-    }
-
-    public void mostrarPrato () {
-        System.out.println("\nNome: " + getNome());
-        System.out.println("Descrição: " + getDescricao());
-        System.out.println("Código: " + getCodigo());
+    public void mostrarItem () {
+        super.mostrarItem();
         System.out.println("Número de calorias: " + nroCalorias);
-        System.out.println("Tempo de preparo: " + getTempoPreparo());
-        System.out.println("Preço unitário: " + getPrecoUnitario());
-        System.out.println("Preço de custo: " + getPrecoCusto());
         mostrarIngredientes();
     }
 

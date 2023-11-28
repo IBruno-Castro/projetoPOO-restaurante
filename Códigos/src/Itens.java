@@ -75,4 +75,11 @@ public abstract class Itens {
 
         return String.valueOf(codigoArray);
     }
+
+    public void mostrarItem(){
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço unitário: " + precoUnitario);
+        System.out.println("Preço de custo: " + precoCusto);
+        System.out.println("Código: " + codigo);
+    }
 }

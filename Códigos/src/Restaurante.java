@@ -24,19 +24,24 @@ public class Restaurante implements EnumsFuncionarios{
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
-                    cadastrarFuncionario();
+                    funcionarios.add(cadastrarFuncionario());
                     break;
                 case 2:
-                    cadastrarIngrediente();
+                    ingredientes.add(cadastrarIngrediente());
                     break;
                 case 3:
-                    //cadastrarItem();
+                    try {
+                        itens.add(cadastrarItens(itens, ingredientes));
+                    } catch (ErroCodigoException e) {
+                        e.getMessage();
+                    }
                     break;
                 case 4:
-                    //cadastrarPedido();
+                    //pedidos.add(cadastrarPedido());
                     break;
                 case 0:
                     System.out.println("Saindo do programa. Até mais!");
@@ -61,6 +66,7 @@ public class Restaurante implements EnumsFuncionarios{
         do {
             System.out.println("Deseja cadastrar um garçom ou um cozinheiro?");
             x = scanner.nextLine();
+            scanner.nextLine();
             x = x.toUpperCase();
 
             if (!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO")) {
@@ -70,21 +76,28 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("\nDigite o nome do funcionário: ");
         String nome = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("\nDigite o CPF do funcionário: ");
         String cpf = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("\nDigite o RG do funcionário: ");
         String rg = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("\nDigite o endereço do funcionário (Rua ..., número): ");
         String end = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("\nDigite o estado civil do funcionário: ");
         String ec = scanner.nextLine();
+        scanner.nextLine();
         ec = ec.toUpperCase();
         System.out.print("\nDigite o número da carteira de trabalho do funcionário: ");
         int nroC = scanner.nextInt();
+        scanner.nextLine();
 
         if(x.equals("GARCOM") || x.equals("GARÇOM")){
             System.out.println("\nDigite o salário base do garçom: ");
             double sal = scanner.nextDouble();
+            scanner.nextLine();
             System.out.println("\nSelecione o dia de folga do garçom: ");
             System.out.println("""
                     1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado
@@ -143,8 +156,10 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("\nDigite o nome do ingrediente: ");
         String nome = scanner.nextLine();
+        scanner.nextLine();
         System.out.print("\nDigite a quantidade do ingrediente: (Ex: 1kg, 1L, 1 unidade)");
         String qtd = scanner.nextLine();
+        scanner.nextLine();
 
         return new Ingredientes(nome, qtd);
     }
@@ -152,7 +167,6 @@ public class Restaurante implements EnumsFuncionarios{
     public static Itens cadastrarItens(ArrayList<Itens> itens, ArrayList<Ingredientes> ingredientes) throws ErroCodigoException{
         System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS\n");
         Itens item = null;
-
 
         sleep.Sleeping(1000);
 
@@ -164,6 +178,7 @@ public class Restaurante implements EnumsFuncionarios{
         do {
             System.out.println("Deseja cadastrar um prato principal, sobremesa ou bebida?");
             x = scanner.nextLine();
+            scanner.nextLine();
             x = x.toUpperCase();
 
             if (!x.equals("BEBIDA") && !x.equals("PRATO PRINCIPAL") && !x.equals("SOBREMESA")) {
@@ -173,34 +188,42 @@ public class Restaurante implements EnumsFuncionarios{
 
         System.out.print("Nome do item: ");
         String nome = scanner.nextLine();
+        scanner.nextLine();
 
         System.out.print("Preço unitário: ");
         double precoUnitario = scanner.nextDouble();
+        scanner.nextLine();
 
         System.out.print("Preço de custo: ");
         double precoCusto = scanner.nextDouble();
+        scanner.nextLine();
 
         if (x.equals("PRATO PRINCIPAL") || x.equals("SOBREMESA")) {
             System.out.print("Descrição: ");
             String descricao = scanner.nextLine();
+            scanner.nextLine();
 
             System.out.print("Tempo de preparo: ");
             double tempoPreparo = scanner.nextDouble();
+            scanner.nextLine();
 
             if (x.equals("PRATO PRINCIPAL")) {
                 item = new PratoPrincipal(nome, descricao, tempoPreparo, precoUnitario, precoCusto, itens);
             } else{
                 System.out.print("Tempo de preparo: ");
                 double nroCal = scanner.nextDouble();
+                scanner.nextLine();
 
                 item = new Sobremesa(nome, descricao, tempoPreparo, precoUnitario, precoCusto, nroCal, itens);
             }
         } else {
             System.out.print("Tipo de embalagem: ");
             String tipoEmbalagem = scanner.nextLine();
+            scanner.nextLine();
 
             System.out.print("Tamanho da embalagem: ");
             String tamanhoEmbalagem = scanner.nextLine();
+            scanner.nextLine();
 
             item = new Bebida(nome, precoUnitario, precoCusto, itens, tipoEmbalagem, tamanhoEmbalagem);
         }

@@ -34,12 +34,9 @@ public class Bebida extends Itens {
         this.tamanhoEmbalagem = tamanhoEmbalagem;
     }
 
-    public void mostrarBebida () {
-        System.out.println("\nNome: " + getNome());
-        System.out.println("Tamanho embalagem: " + getTamanhoEmbalagem());
-        System.out.println("Código: " + getCodigo());
+    public void mostrarItem () {
+        super.mostrarItem();
         System.out.println("Tipo embalagem: " + getTipoEmbalagem());
-        System.out.println("Preço unitário: " + getPrecoUnitario());
-        System.out.println("Preço de custo: " + getPrecoCusto());
+        System.out.println("Tamanho embalagem: " + getTamanhoEmbalagem());
     }
 }

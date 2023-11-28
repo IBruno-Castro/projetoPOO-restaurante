@@ -74,5 +74,18 @@ public class Pedido {
     public void setItens(ArrayList<ItemPedido> itens) {
         this.itens = itens;
     }
+
+    public void mostrarPedido() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy\tHH:mm:ss");
+        System.out.println(dataPedido.format(formatter));
+        System.out.println("Garçom: " + garcom.getNome());
+        System.out.println("Cozinheiro: " + cozinheiro.getNome());
+        System.out.println("Itens: ");
+        for (ItemPedido item : itens) {
+            item.mostrarItem();
+        }
+        System.out.println("Forma de pagamento: " + formaPag);
+        System.out.println("Pagamento confirmado: " + horaPagamento.format(formatter));
+    }
      
 }
