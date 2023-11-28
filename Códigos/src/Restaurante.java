@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -66,7 +67,44 @@ public class Restaurante implements EnumsFuncionarios{
                     }
                     break;
                 case 4:
-                    //pedidos.add(cadastrarPedido());
+                    try {
+                        pedidos.add(cadastrarPedido(funcionarios));
+                        pedidos.get(pedidos.size() - 1).mostrarPedido();
+                        
+                        String c;
+                        do
+                        {
+                            System.out.println("Lista itens: ");
+                            for (int index = 0; index < itens.size(); index++) {
+                                System.out.print(index + ".");
+                                itens.get(index).mostrarItem();
+                            }
+
+                            System.out.println("Digite a opcao do item que deseja adicionar: ");
+                            int op = scanner.nextInt();
+                            scanner.nextLine();
+                            
+                            System.out.println("Digite a quantidade deseja adicionar: ");
+                            int qtd = scanner.nextInt();
+                            scanner.nextLine();
+
+                            ItemPedido item = new ItemPedido(itens.get(op), qtd);
+                            pedidos.get(pedidos.size() - 1).adicionarItem(item);
+
+                            System.out.println("Deseja adicionar outro item? s/n");
+                            c = scanner.nextLine();
+                        } while(c.equals("s"));
+
+                        //pedidos.get(pedidos.size() - 1).calcularValorTotal();
+
+                        System.out.println("Digite a forma de pagamento: ");
+                        String formaPag = scanner.nextLine();
+                        pedidos.get(pedidos.size() - 1).setFormaPag(formaPag);
+                        pedidos.get(pedidos.size() - 1).confirmarPagamento();
+
+                    } catch (PagamentoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 0:
                     System.out.println("Saindo do programa. Até mais!");
@@ -248,11 +286,63 @@ public class Restaurante implements EnumsFuncionarios{
         return item;
     }
 
-    /*public static Pedido cadastrarPedido(){
+    public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios){
+        System.out.println("CADASTRAMENTO DE PEDIDOS\n");
+        Garcom garcom = null;
+        Cozinheiro cozinheiro = null;
 
+        sleep.Sleeping(1000);
+
+        System.out.println("Iniciando cadastro...\n");
+
+        sleep.Sleeping(1000);
+
+        do 
+        {
+            System.out.println("Lista de garçons: ");
+            for (int index = 0; index < funcionarios.size(); index++) {
+                if(funcionarios.get(index) instanceof Garcom){
+                    System.out.print(index + ".");
+                    funcionarios.get(index).mostrarFuncionario();
+                }
+            }
+            System.out.println("Digite o codigo do garçom: ");
+            int op = scanner.nextInt();
+            scanner.nextLine();
+
+            if (funcionarios.get(op) instanceof Garcom) {
+                garcom = (Garcom) funcionarios.get(op);
+            } else {
+                garcom = null;
+            }
+            
+        } while (garcom == null);
+
+        do 
+        {
+            System.out.println("Lista de cozinheiros: ");
+            for (int index = 0; index < funcionarios.size(); index++) {
+                if(funcionarios.get(index) instanceof Cozinheiro){
+                    System.out.print(index + ".");
+                    funcionarios.get(index).mostrarFuncionario();
+                }
+            }
+            System.out.println("Digite o codigo do cozinheiro: ");
+            int op = scanner.nextInt();
+            scanner.nextLine();
+
+            if (funcionarios.get(op) instanceof Cozinheiro) {
+                cozinheiro = (Cozinheiro) funcionarios.get(op);
+            } else {
+                cozinheiro = null;
+            }
+            
+        } while (cozinheiro == null);
+
+        return new Pedido(garcom, cozinheiro);
     }
 
-    public static void fecharMes(){
+    /*public static void fecharMes(){
 
     }*/
 }

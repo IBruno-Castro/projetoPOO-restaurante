@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Pedido {
-    private ArrayList<ItemPedido> itens;
+    private ArrayList<ItemPedido> itens = new ArrayList<>();
     private float valorTotal;
     private LocalDateTime dataPedido;
     private LocalDateTime horaPagamento;
@@ -11,17 +11,16 @@ public class Pedido {
     private Garcom garcom;
     private Cozinheiro cozinheiro;
 
-    public Pedido(ItemPedido[] itens, String formaPag, Garcom garcom, Cozinheiro cozinheiro) {
-        this.itens = new ArrayList<>();
+    public Pedido(Garcom garcom, Cozinheiro cozinheiro) {
         this.valorTotal = 0;
         this.dataPedido = LocalDateTime.now();
-        this.formaPag = formaPag;
+        this.formaPag = null;
         this.garcom = garcom;
         this.cozinheiro = cozinheiro;
     }
 
     public void confirmarPagamento() throws PagamentoException {
-        formaPag = formaPag.toUpperCase();
+        this.formaPag = formaPag.toUpperCase();
         if (formaPag.equals("DINHEIRO")) {
             System.out.println("Pagamento confirmado!");
             this.horaPagamento = LocalDateTime.now();
@@ -36,6 +35,14 @@ public class Pedido {
         }
     }
 
+    public String getFormaPag() {
+        return formaPag;
+    }
+
+    public void setFormaPag(String formaPag) {
+        this.formaPag = formaPag;
+    }
+
     /*public void calcularValorTotal() {
         for (ItemPedido item : itens) {
             //this.valorTotal += item./getItem().getPrecoUni() * item.getQtd();
@@ -43,7 +50,11 @@ public class Pedido {
     }*/
 
     public void adicionarItem(ItemPedido item) {
-        this.itens.add(item);
+        itens.add(item);
+    }
+
+    public void removerItem(ItemPedido item) {
+        itens.remove(item);
     }
 
     public ArrayList<ItemPedido> getItens() {
@@ -62,24 +73,12 @@ public class Pedido {
         return horaPagamento;
     }
 
-    public String getFormaPag() {
-        return formaPag;
-    }
-
-    public void setFormaPag(String formaPag) {
-        this.formaPag = formaPag;
-    }
-
     public Garcom getGarcom() {
         return garcom;
     }
 
     public Cozinheiro getCozinheiro() {
         return cozinheiro;
-    }
-
-    public void setItens(ArrayList<ItemPedido> itens) {
-        this.itens = itens;
     }
 
     public void mostrarPedido() {
