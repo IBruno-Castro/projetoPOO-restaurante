@@ -1,11 +1,10 @@
 import java.lang.IllegalArgumentException;
-import java.time.LocalDateTime;
 
-public class Garcom extends Funcionario implements EnumsFuncionarios{
+public class Garcom extends Funcionario {
     private double salarioBase;
     private EnumsFuncionarios.DiaSemana diaFolga;
     
-    private static float limite = 100;
+    private static double limite = 100;
 
     public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
