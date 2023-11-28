@@ -20,13 +20,20 @@ public class Pedido {
         this.cozinheiro = cozinheiro;
     }
 
-    /*public void realizarPedido() {
-        this.garcom.registrarPedido(this);
-        this.cozinheiro.registrarPedido(this);
-    }*/
-
-    public void confirmarPagamento() {
-        this.horaPagamento = LocalDateTime.now();
+    public void confirmarPagamento() throws PagamentoException {
+        formaPag = formaPag.toUpperCase();
+        if (formaPag.equals("DINHEIRO")) {
+            System.out.println("Pagamento confirmado!");
+            this.horaPagamento = LocalDateTime.now();
+        } else if (formaPag.equals("CARTÃO") || formaPag.equals("CARTAO")) {
+            System.out.println("Pagamento confirmado!");
+            this.horaPagamento = LocalDateTime.now();
+        } else if (formaPag.equals("PIX")) {
+            System.out.println("Pagamento confirmado!");
+            this.horaPagamento = LocalDateTime.now();
+        } else {
+            throw new PagamentoException("Forma de pagamento inválida!\nAceitamos apenas dinheiro, cartão ou pix.");
+        }
     }
 
     /*public void calcularValorTotal() {
