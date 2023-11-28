@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class Restaurante implements EnumsFuncionarios{
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
-    public static void main(String args[]){
+    public static void main(String[] args){
         Funcionario funcionario = cadastrarFuncionario();
 
         funcionario.mostrarFuncionario();
     }
 
     public static Funcionario cadastrarFuncionario() {
-        System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS: \n");
+        System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS\n");
 
         sleep.Sleeping(1000);
 
@@ -25,58 +25,43 @@ public class Restaurante implements EnumsFuncionarios{
             x = scanner.nextLine();
             x = x.toUpperCase();
 
-            System.out.println(x);
-
             if (!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO")) {
                 System.out.println("Entrada inválida!\n");
             }
         } while(!x.equals("GARCOM") && !x.equals("GARÇOM") && !x.equals("COZINHEIRO"));
 
-        System.out.printf("Digite o nome do funcionário: ");
+        System.out.print("\nDigite o nome do funcionário: ");
         String nome = scanner.nextLine();
-        //scanner.nextLine();
-        System.out.printf("\nDigite o CPF do funcionário: ");
+        System.out.print("\nDigite o CPF do funcionário: ");
         String cpf = scanner.nextLine();
-        //scanner.nextLine();
-        System.out.printf("\nDigite o RG do funcionário: ");
+        System.out.print("\nDigite o RG do funcionário: ");
         String rg = scanner.nextLine();
-        //scanner.nextLine();
-        System.out.printf("\nDigite o endereço do funcionário (Rua ..., número): ");
+        System.out.print("\nDigite o endereço do funcionário (Rua ..., número): ");
         String end = scanner.nextLine();
-        //scanner.nextLine();
-        System.out.println("\nDigite o estado civil do funcionário: ");
+        System.out.print("\nDigite o estado civil do funcionário: ");
         String ec = scanner.nextLine();
-        //scanner.nextLine();
         ec = ec.toUpperCase();
-        System.out.println("\nDigite o número da carteira de trabalho do funcionário: ");
+        System.out.print("\nDigite o número da carteira de trabalho do funcionário: ");
         int nroC = scanner.nextInt();
 
         if(x.equals("GARCOM") || x.equals("GARÇOM")){
             System.out.println("\nDigite o salário base do garçom: ");
             double sal = scanner.nextDouble();
             System.out.println("\nSelecione o dia de folga do garçom: ");
-            System.out.println("\n1. Domingo" +
-                    "2. Segunda-Feira" +
-                    "3. Terça-feira" +
-                    "4. Quarta-feira" +
-                    "5. Quinta-feira" +
-                    "6. Sexta-feira" +
-                    "7. Sábado\n");
+            System.out.println("""
+                    1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado
+                    """);
 
             int folga = scanner.nextInt();
 
-            Funcionario garcom = new Garcom(nome, end, converterEstadoCivil(ec), nroC, cpf, rg, sal, converterFolga(folga));
-            return garcom;
+            return new Garcom(nome, end, converterEstadoCivil(ec), nroC, cpf, rg, sal, converterFolga(folga));
         }
 
-        Funcionario cozinheiro = new Cozinheiro(nome, end, converterEstadoCivil(ec), nroC, cpf, rg);
-        return cozinheiro;
+        return new Cozinheiro(nome, end, converterEstadoCivil(ec), nroC, cpf, rg);
     }
 
     public static EnumsFuncionarios.EstadoCivil converterEstadoCivil(String ec){
-        System.out.println(ec);
         if(Objects.equals(ec, "SOLTEIRO") || Objects.equals(ec, "SOLTEIRA")){
-            System.out.println("aoba");
             return EstadoCivil.SOLTEIRA;
         }
         if(Objects.equals(ec, "CASADO") || Objects.equals(ec, "CASADA")){
