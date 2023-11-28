@@ -149,11 +149,66 @@ public class Restaurante implements EnumsFuncionarios{
         return new Ingredientes(nome, qtd);
     }
 
-    /*public static Itens cadastrarItens(){
+    public static Itens cadastrarItens(ArrayList<Itens> itens, ArrayList<Ingredientes> ingredientes) throws ErroCodigoException{
+        System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS\n");
+        Itens item = null;
 
+
+        sleep.Sleeping(1000);
+
+        System.out.println("Iniciando cadastro...\n");
+
+        sleep.Sleeping(1000);
+
+        String x;
+        do {
+            System.out.println("Deseja cadastrar um prato principal, sobremesa ou bebida?");
+            x = scanner.nextLine();
+            x = x.toUpperCase();
+
+            if (!x.equals("BEBIDA") && !x.equals("PRATO PRINCIPAL") && !x.equals("SOBREMESA")) {
+                System.out.println("Entrada inválida!\n");
+            }
+        } while(!x.equals("BEBIDA") && !x.equals("PRATO PRINCIPAL") && !x.equals("SOBREMESA"));
+
+        System.out.print("Nome do item: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Preço unitário: ");
+        double precoUnitario = scanner.nextDouble();
+
+        System.out.print("Preço de custo: ");
+        double precoCusto = scanner.nextDouble();
+
+        if (x.equals("PRATO PRINCIPAL") || x.equals("SOBREMESA")) {
+            System.out.print("Descrição: ");
+            String descricao = scanner.nextLine();
+
+            System.out.print("Tempo de preparo: ");
+            double tempoPreparo = scanner.nextDouble();
+
+            if (x.equals("PRATO PRINCIPAL")) {
+                item = new PratoPrincipal(nome, descricao, tempoPreparo, precoUnitario, precoCusto, itens);
+            } else{
+                System.out.print("Tempo de preparo: ");
+                double nroCal = scanner.nextDouble();
+
+                item = new Sobremesa(nome, descricao, tempoPreparo, precoUnitario, precoCusto, nroCal, itens);
+            }
+        } else {
+            System.out.print("Tipo de embalagem: ");
+            String tipoEmbalagem = scanner.nextLine();
+
+            System.out.print("Tamanho da embalagem: ");
+            String tamanhoEmbalagem = scanner.nextLine();
+
+            item = new Bebida(nome, precoUnitario, precoCusto, itens, tipoEmbalagem, tamanhoEmbalagem);
+        }
+
+        return item;
     }
 
-    public static Pedido cadastrarPedido(){
+    /*public static Pedido cadastrarPedido(){
 
     }
 
