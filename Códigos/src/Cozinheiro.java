@@ -4,8 +4,8 @@ import java.util.List;
 public class Cozinheiro extends Funcionario{
     private List<Prato> listaPratos = new ArrayList<Prato>();
 
-    private static float pratoP = 30;
-    private static float sobremesa = 20;
+    private static double pratoP = 30;
+    private static double sobremesa = 20;
 
     public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
