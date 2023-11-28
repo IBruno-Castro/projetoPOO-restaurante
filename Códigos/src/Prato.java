@@ -14,9 +14,8 @@ public abstract class Prato extends Itens {
         this.tempoPreparo = tempoPreparo;
     }
 
-    public void adicionarIngredientes (String nome, String quantidade) {
-        Ingredientes temp = new Ingredientes(nome, quantidade);
-        listaIngredientes.add(temp);
+    public void adicionarIngredientes (Ingredientes ingrediente) {
+        listaIngredientes.add(ingrediente);
     }
 
     public String getDescricao() {
