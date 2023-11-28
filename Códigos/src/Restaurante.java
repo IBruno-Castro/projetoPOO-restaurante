@@ -70,7 +70,6 @@ public class Restaurante implements EnumsFuncionarios{
                 case 4:
                     try {
                         pedidos.add(cadastrarPedido(funcionarios));
-                        pedidos.get(pedidos.size() - 1).mostrarPedido();
                         
                         String c;
                         do
@@ -103,6 +102,7 @@ public class Restaurante implements EnumsFuncionarios{
                         pedidos.get(pedidos.size() - 1).setFormaPag(formaPag);
                         pedidos.get(pedidos.size() - 1).confirmarPagamento();
 
+                        pedidos.get(pedidos.size() - 1).mostrarPedido();
                     } catch (PagamentoException e) {
                         System.out.println(e.getMessage());
                     }
