@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -5,9 +6,46 @@ public class Restaurante implements EnumsFuncionarios{
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
     public static void main(String[] args){
-        Funcionario funcionario = cadastrarFuncionario();
 
-        funcionario.mostrarFuncionario();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<Itens> itens = new ArrayList<>();
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        ArrayList<Ingredientes> ingredientes = new ArrayList<>();
+        int opcao;
+
+        do {
+            System.out.println("BEM-VINDO AO RESTAURANTE\n");
+            System.out.println("============== Menu ==============");
+            System.out.println("1. Cadastrar Funcionário");
+            System.out.println("2. Cadastrar Ingrediente");
+            System.out.println("3. Cadastrar Item");
+            System.out.println("4. Cadastrar Pedido");
+            System.out.println("0. Sair");
+            System.out.println("==================================");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    cadastrarFuncionario();
+                    break;
+                case 2:
+                    cadastrarIngrediente();
+                    break;
+                case 3:
+                    //cadastrarItem();
+                    break;
+                case 4:
+                    //cadastrarPedido();
+                    break;
+                case 0:
+                    System.out.println("Saindo do programa. Até mais!");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while (opcao != 0);
+        
     }
 
     public static Funcionario cadastrarFuncionario() {
@@ -92,6 +130,23 @@ public class Restaurante implements EnumsFuncionarios{
             case 7 -> DiaSemana.SABADO;
             default -> null;
         };
+    }
+
+    public static Ingredientes cadastrarIngrediente(){
+        System.out.println("CADASTRAMENTO DE INGREDIENTES\n");
+
+        sleep.Sleeping(1000);
+
+        System.out.println("Iniciando cadastro...\n");
+
+        sleep.Sleeping(1000);
+
+        System.out.print("\nDigite o nome do ingrediente: ");
+        String nome = scanner.nextLine();
+        System.out.print("\nDigite a quantidade do ingrediente: (Ex: 1kg, 1L, 1 unidade)");
+        String qtd = scanner.nextLine();
+
+        return new Ingredientes(nome, qtd);
     }
 
     /*public static Itens cadastrarItens(){
