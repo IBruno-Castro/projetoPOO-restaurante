@@ -3,7 +3,8 @@ import java.lang.IllegalArgumentException;
 public class Garcom extends Funcionario {
     private double salarioBase;
     private EnumsFuncionarios.DiaSemana diaFolga;
-    private int nroPedidos = 0;
+    private int advertencias = 0;
+    private int nroPedidosAtendidos = 0;
     
     private static double limite = 3;
 
@@ -47,6 +48,8 @@ public class Garcom extends Funcionario {
 
     public void mostrarFuncionario() {
         super.mostrarFuncionario();
+        System.out.println("Numero de pedidos atendidos: " + nroPedidosAtendidos);
+        System.out.println("Advertências: " + advertencias);
         System.out.println("Salario base: " + salarioBase);
         System.out.println("Dia de folga: " + mostrarDia());
     }
@@ -72,16 +75,24 @@ public class Garcom extends Funcionario {
         }
     }
 
-    public void verificarPerformance(int nroPedidosAtendidos, int nroPedidosTotais){
-        if(nroPedidosAtendidos < (nroPedidosTotais * 0.05)){
-            nroPedidos++;
+    public void registrarPedido(){
+        nroPedidosAtendidos++;
+    }
+
+    public int getNroPedidosAtendidos(){
+        return nroPedidosAtendidos;
+    }
+
+    public void verificarPerformance(int nroPedidosTotais){
+        if(this.nroPedidosAtendidos < (nroPedidosTotais * 0.05)){
+            advertencias++;
         } else {
-            nroPedidos = 0;
+            advertencias = 0;
         }
     }
 
     public boolean verificarDemissao(){
-        if(nroPedidos >= 3){
+        if(advertencias >= 3){
             return true;
         } else {
             return false;

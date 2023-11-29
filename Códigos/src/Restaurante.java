@@ -183,7 +183,7 @@ public class Restaurante implements EnumsFuncionarios{
                             escolha = scanner.nextLine();
                         } while(escolha.equals("s"));
 
-                        //pedidos.get(pedidos.size() - 1).calcularValorTotal();
+                        pedidos.get(pedidos.size() - 1).calcularValorTotal();
 
                         System.out.println("Digite a forma de pagamento: ");
                         String formaPag = scanner.nextLine();
@@ -455,10 +455,12 @@ public class Restaurante implements EnumsFuncionarios{
 
                 System.out.println("Confirmar o garçom? s/n");
                 c = scanner.nextLine();
+
             } while (!c.equals("s"));
 
             if (funcionarios.get(op) instanceof Garcom) {
                 garcom = (Garcom) funcionarios.get(op);
+                garcom.registrarPedido();
             } else {
                 garcom = null;
             }
@@ -474,7 +476,7 @@ public class Restaurante implements EnumsFuncionarios{
                         System.out.println(index + "." + funcionarios.get(index).getNome());
                     }
                 }
-                System.out.println("Digite o codigo do garçom: ");
+                System.out.println("Digite o codigo do cozinheiro: ");
                 op = scanner.nextInt();
                 scanner.nextLine();
 
@@ -496,7 +498,9 @@ public class Restaurante implements EnumsFuncionarios{
     }
 
     public static void fecharMes(ArrayList<Funcionario> funcionarios, int nroPedidos){
-        
+
+        demitirFuncionario(funcionarios, nroPedidos);
+
         nroPedidos = 0;
 
         for (Funcionario funcionario : funcionarios) {
@@ -566,5 +570,17 @@ public class Restaurante implements EnumsFuncionarios{
             System.out.println("Deseja verificar outro pedido?");
             input = scanner.nextLine();
         } while (!input.equals("n"));
+    }
+
+    public static void demitirFuncionario(ArrayList<Funcionario> funcionarios, int pedidosTotais){
+
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario instanceof Garcom) {
+                ((Garcom)funcionario).verificarPerformance(pedidosTotais);
+                if (((Garcom)funcionario).verificarDemissao() == true) {
+                    funcionarios.remove(funcionario);
+                }
+            }
+        }
     }
 }
