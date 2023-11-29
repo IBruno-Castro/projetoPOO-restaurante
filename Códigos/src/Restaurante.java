@@ -57,6 +57,7 @@ public class Restaurante implements EnumsFuncionarios{
             System.out.println("5. Checar Item");
             System.out.println("6. Checar Funcionário");
             System.out.println("7. Checar Pedido");
+            System.out.println("8. Fechar mes");
             System.out.println("0. Sair");
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
@@ -169,7 +170,7 @@ public class Restaurante implements EnumsFuncionarios{
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increasePrincipal(qtd);
                             }
-                            
+
                             if (itens.get(op) instanceof Sobremesa) {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increaseSobremesa(qtd);
@@ -202,6 +203,8 @@ public class Restaurante implements EnumsFuncionarios{
                     mostrarFuncionarios(funcionarios);
                 case 7: 
                     mostrarPedidos(pedidos);
+                case 8:
+                    fecharMes(funcionarios, nroPedidos);
                 case 0:
                     System.out.println("Saindo do programa. Até mais!");
                     break;
@@ -492,9 +495,18 @@ public class Restaurante implements EnumsFuncionarios{
         return new Pedido(garcom, cozinheiro);
     }
 
-    /*public static void fecharMes(){
+    public static void fecharMes(ArrayList<Funcionario> funcionarios, int nroPedidos){
+        
+        nroPedidos = 0;
 
-    }*/
+        for (Funcionario funcionario : funcionarios) {
+            if (funcionario instanceof Cozinheiro) {
+                System.out.println("Salario de " + funcionario.getNome() + ": " + funcionario.calcularSalario());
+            } else {
+                System.out.println("Salario de " + funcionario.getNome() + ": " + ((Garcom) funcionario).calcularSalario(nroPedidos));
+            }
+        }
+    }
 
     public static void mostrarItens(ArrayList<Itens> itens){
         String input;
