@@ -7,12 +7,43 @@ public class Restaurante implements EnumsFuncionarios{
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
     static SoundTrack sound = new SoundTrack();
+
     public static void main(String[] args){
 
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Itens> itens = new ArrayList<>();
         ArrayList<Pedido> pedidos = new ArrayList<>();
         ArrayList<Ingredientes> ingredientes = new ArrayList<>();
+
+        
+        try {
+            // Bebida instances
+            itens.add(new Bebida("Nome1", 10.0, 5.0, itens, "TipoEmbalagem1", "TamanhoEmbalagem1"));
+            itens.add(new Bebida("Nome2", 15.0, 8.0, itens, "TipoEmbalagem2", "TamanhoEmbalagem2"));
+
+            // Sobremesa instances
+            itens.add(new Sobremesa("Nome1", "Descricao1", 20.0, 12.0, 7.0,  13000.0,itens));
+            itens.add(new Sobremesa("Nome2", "Descricao2", 25.0, 18.0, 10.0, 1200.0, itens));
+
+            // PratoPrincipal instances
+            itens.add(new PratoPrincipal("Nome1", "Descricao1", 30.0, 25.0, 15.0, itens));
+            itens.add(new PratoPrincipal("Nome2", "Descricao2", 35.0, 30.0, 20.0, itens));
+        } catch (ErroCodigoException e) {
+            System.out.println(e);
+        }
+
+        // Cozinheiro instances
+        funcionarios.add(new Cozinheiro("Nome1", "Endereco1", EstadoCivil.DIVORCIADA, 4, "CPF1", "RG1"));
+        funcionarios.add(new Cozinheiro("Nome2", "Endereco2", EstadoCivil.CASADA, 3, "CPF2", "RG2"));
+
+        // Garcom instances
+        funcionarios.add(new Garcom("Nome1", "Endereco1", EstadoCivil.DIVORCIADA, 2, "CPF1", "RG1", 1500, DiaSemana.SEXTA));
+        funcionarios.add(new Garcom("Nome2", "Endereco2", EstadoCivil.CASADA, 1, "CPF2", "RG2", 1800, DiaSemana.DOMINGO));
+
+        // Ingredientes instances
+        ingredientes.add(new Ingredientes("NomeIngrediente1", "Quantidade1"));
+        ingredientes.add(new Ingredientes("NomeIngrediente2", "Quantidade2"));
+
         int opcao;
 
         do {
