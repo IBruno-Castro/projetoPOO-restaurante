@@ -6,7 +6,6 @@ public class Cozinheiro extends Funcionario{
 
     private static double pratoP = 30;
     private static double sobremesa = 20;
-
     private int qtdSobremesa;
     private int qtdPrincipal;
 
