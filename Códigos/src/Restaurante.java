@@ -60,9 +60,42 @@ public class Restaurante implements EnumsFuncionarios{
             opcao = scanner.nextInt();
             scanner.nextLine();
 
+            String escolha;
+            int op;
+
             switch (opcao) {
                 case 1:
                     funcionarios.add(cadastrarFuncionario());
+
+                    if(funcionarios.get(funcionarios.size() - 1) instanceof Cozinheiro){
+                        
+                        System.out.println("Adicione pratos preparados pelo cozinheiro");
+                        do{
+                            do {
+                                System.out.println("\nLista de pratos: ");
+                                for (int index = 0; index < itens.size(); index++) {
+                                    if(itens.get(index) instanceof Prato){
+                                        System.out.println(index + "." + itens.get(index).getNome());
+                                    }
+                                }
+
+                                System.out.println("Digite o index do prato para adicioná-lo na lista do cozinheiro: ");
+                                op = scanner.nextInt();
+                                scanner.nextLine();
+
+                                itens.get(op).mostrarItem();
+
+                                System.out.println("Adicionar o prato? s/n");
+                                escolha = scanner.nextLine();
+                            } while (!escolha.equals("s"));
+
+                            ((Cozinheiro) funcionarios.get(funcionarios.size() - 1)).addPrato((Prato)itens.get(op));
+
+                            System.out.println("Quer adicionar outro prato? s/n");
+                            escolha = scanner.nextLine();
+                        } while(!escolha.equals("n"));
+                    }
+
                     funcionarios.get(funcionarios.size() - 1).mostrarFuncionario();
                     break;
                 case 2:
@@ -74,8 +107,6 @@ public class Restaurante implements EnumsFuncionarios{
                         itens.add(cadastrarItens(itens, ingredientes));
 
                         if(itens.get(itens.size() - 1) instanceof Prato){
-                            String c;
-                            int op;
                             do{
                                 do {
                                     System.out.println("\nLista ingredientes: ");
@@ -90,14 +121,14 @@ public class Restaurante implements EnumsFuncionarios{
                                     ingredientes.get(op).mostrarIngrediente();
 
                                     System.out.println("Confirmar ingrediente? s/n");
-                                    c = scanner.nextLine();
-                                } while (!c.equals("s"));
+                                    escolha = scanner.nextLine();
+                                } while (!escolha.equals("s"));
 
                                 ((Prato) itens.get(itens.size() - 1)).adicionarIngredientes(ingredientes.get(op));
 
                                 System.out.println("Quer adicionar outro ingrediente? s/n");
-                                c = scanner.nextLine();
-                            } while(!c.equals("n"));
+                                escolha = scanner.nextLine();
+                            } while(!escolha.equals("n"));
                         }
 
                         itens.get(itens.size() - 1).mostrarItem();
@@ -108,9 +139,7 @@ public class Restaurante implements EnumsFuncionarios{
                 case 4:
                     try {
                         pedidos.add(cadastrarPedido(funcionarios));
-                        
-                        String c;
-                        int op;
+
                         do
                         {
                             do {
@@ -126,8 +155,8 @@ public class Restaurante implements EnumsFuncionarios{
                                 itens.get(op).mostrarItem();
 
                                 System.out.println("Confirmar item? s/n");
-                                c = scanner.nextLine();
-                            } while(!c.equals("s"));
+                                escolha = scanner.nextLine();
+                            } while(!escolha.equals("s"));
                             
                             System.out.println("Digite a quantidade deseja adicionar: ");
                             int qtd = scanner.nextInt();
@@ -137,8 +166,8 @@ public class Restaurante implements EnumsFuncionarios{
                             pedidos.get(pedidos.size() - 1).adicionarItem(item);
 
                             System.out.println("Deseja adicionar outro item? s/n");
-                            c = scanner.nextLine();
-                        } while(c.equals("s"));
+                            escolha = scanner.nextLine();
+                        } while(escolha.equals("s"));
 
                         //pedidos.get(pedidos.size() - 1).calcularValorTotal();
 
@@ -201,8 +230,18 @@ public class Restaurante implements EnumsFuncionarios{
         System.out.print("\nDigite o endereço do funcionário (Rua ..., número): ");
         String end = scanner.nextLine();
 
-        System.out.print("\nDigite o estado civil do funcionário: ");
-        String ec = scanner.nextLine();
+        String ec;
+        EnumsFuncionarios.EstadoCivil ecConvertido;
+        do {
+            System.out.print("\nDigite o estado civil do funcionário: ");
+            ec = scanner.nextLine();
+
+            ecConvertido = converterEstadoCivil(ec);
+
+            if(ecConvertido == null){
+                System.out.println("Estado Civil inválido!");
+            }
+        } while (ecConvertido == null);
         ec = ec.toUpperCase();
 
         System.out.print("\nDigite o número da carteira de trabalho do funcionário: ");
@@ -219,10 +258,10 @@ public class Restaurante implements EnumsFuncionarios{
 
             int folga = scanner.nextInt();
 
-            return new Garcom(nome, end, converterEstadoCivil(ec), nroC, cpf, rg, sal, converterFolga(folga));
+            return new Garcom(nome, end, ecConvertido, nroC, cpf, rg, sal, converterFolga(folga));
         }
 
-        return new Cozinheiro(nome, end, converterEstadoCivil(ec), nroC, cpf, rg);
+        return new Cozinheiro(nome, end, ecConvertido, nroC, cpf, rg);
     }
 
     public static EnumsFuncionarios.EstadoCivil converterEstadoCivil(String ec){
