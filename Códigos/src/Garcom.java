@@ -3,6 +3,7 @@ import java.lang.IllegalArgumentException;
 public class Garcom extends Funcionario {
     private double salarioBase;
     private EnumsFuncionarios.DiaSemana diaFolga;
+    private int nroPedidos = 0;
     
     private static double limite = 3;
 
