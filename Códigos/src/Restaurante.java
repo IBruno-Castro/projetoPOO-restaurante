@@ -46,15 +46,22 @@ public class Restaurante implements EnumsFuncionarios{
                             String c;
                             int op;
                             do{
-                                System.out.println("Lista ingredientes: ");
-                                for (int index = 0; index < ingredientes.size(); index++) {
-                                    System.out.print(index + ".");
-                                    ingredientes.get(index).mostrarIngrediente();
-                                }
+                                do {
+                                    System.out.println("\nLista ingredientes: ");
+                                    for (int index = 0; index < ingredientes.size(); index++) {
+                                        System.out.println(index + "." + ingredientes.get(index).getNome());
+                                    }
 
-                                System.out.println("Digite o index do ingrediente para adicionar: ");
-                                op = scanner.nextInt();
-                                scanner.nextLine();
+                                    System.out.println("Digite o index do ingrediente para adicionar: ");
+                                    op = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    ingredientes.get(op).mostrarIngrediente();
+
+                                    System.out.println("Confirmar ingrediente? s/n");
+                                    c = scanner.nextLine();
+                                } while (!c.equals("s"));
+
                                 ((Prato) itens.get(itens.size() - 1)).adicionarIngredientes(ingredientes.get(op));
 
                                 System.out.println("Quer adicionar outro ingrediente? s/n");
@@ -72,17 +79,24 @@ public class Restaurante implements EnumsFuncionarios{
                         pedidos.add(cadastrarPedido(funcionarios));
                         
                         String c;
+                        int op;
                         do
                         {
-                            System.out.println("Lista itens: ");
-                            for (int index = 0; index < itens.size(); index++) {
-                                System.out.print(index + ".");
-                                itens.get(index).mostrarItem();
-                            }
+                            do {
+                                System.out.println("\nLista itens: ");
+                                for (int index = 0; index < itens.size(); index++) {
+                                    System.out.println(index + "." + itens.get(index).getNome());
+                                }
 
-                            System.out.println("Digite a opcao do item que deseja adicionar: ");
-                            int op = scanner.nextInt();
-                            scanner.nextLine();
+                                System.out.println("Digite a opcao do item que deseja adicionar: ");
+                                op = scanner.nextInt();
+                                scanner.nextLine();
+
+                                itens.get(op).mostrarItem();
+
+                                System.out.println("Confirmar item? s/n");
+                                c = scanner.nextLine();
+                            } while(!c.equals("s"));
                             
                             System.out.println("Digite a quantidade deseja adicionar: ");
                             int qtd = scanner.nextInt();
@@ -140,8 +154,15 @@ public class Restaurante implements EnumsFuncionarios{
         System.out.print("\nDigite o nome do funcionário: ");
         String nome = scanner.nextLine();
 
-        System.out.print("\nDigite o CPF do funcionário: ");
-        String cpf = scanner.nextLine();
+        String cpf;
+        do {
+            System.out.print("\nDigite o CPF do funcionário: ");
+            cpf = scanner.nextLine();
+
+            if(!ValidaCPF.validaCPF(cpf)){
+                System.out.println("CPF inválido!");
+            }
+        } while (!ValidaCPF.validaCPF(cpf));
 
         System.out.print("\nDigite o RG do funcionário: ");
         String rg = scanner.nextLine();
@@ -298,18 +319,26 @@ public class Restaurante implements EnumsFuncionarios{
 
         sleep.Sleeping(1000);
 
+        String c;
+        int op;
         do 
         {
-            System.out.println("Lista de garçons: ");
-            for (int index = 0; index < funcionarios.size(); index++) {
-                if(funcionarios.get(index) instanceof Garcom){
-                    System.out.print(index + ".");
-                    funcionarios.get(index).mostrarFuncionario();
+            do {
+                System.out.println("\nLista de garçons: ");
+                for (int index = 0; index < funcionarios.size(); index++) {
+                    if(funcionarios.get(index) instanceof Garcom){
+                        System.out.println(index + "." + funcionarios.get(index).getNome());
+                    }
                 }
-            }
-            System.out.println("Digite o codigo do garçom: ");
-            int op = scanner.nextInt();
-            scanner.nextLine();
+                System.out.println("Digite o codigo do garçom: ");
+                op = scanner.nextInt();
+                scanner.nextLine();
+
+                funcionarios.get(op).mostrarFuncionario();
+
+                System.out.println("Confirmar o garçom? s/n");
+                c = scanner.nextLine();
+            } while (!c.equals("s"));
 
             if (funcionarios.get(op) instanceof Garcom) {
                 garcom = (Garcom) funcionarios.get(op);
@@ -321,16 +350,22 @@ public class Restaurante implements EnumsFuncionarios{
 
         do 
         {
-            System.out.println("Lista de cozinheiros: ");
-            for (int index = 0; index < funcionarios.size(); index++) {
-                if(funcionarios.get(index) instanceof Cozinheiro){
-                    System.out.print(index + ".");
-                    funcionarios.get(index).mostrarFuncionario();
+            do {
+                System.out.println("\nLista de cozinheiros: ");
+                for (int index = 0; index < funcionarios.size(); index++) {
+                    if(funcionarios.get(index) instanceof Cozinheiro){
+                        System.out.println(index + "." + funcionarios.get(index).getNome());
+                    }
                 }
-            }
-            System.out.println("Digite o codigo do cozinheiro: ");
-            int op = scanner.nextInt();
-            scanner.nextLine();
+                System.out.println("Digite o codigo do garçom: ");
+                op = scanner.nextInt();
+                scanner.nextLine();
+
+                funcionarios.get(op).mostrarFuncionario();
+
+                System.out.println("Confirmar o cozinheiro? s/n");
+                c = scanner.nextLine();
+            } while (!c.equals("s"));
 
             if (funcionarios.get(op) instanceof Cozinheiro) {
                 cozinheiro = (Cozinheiro) funcionarios.get(op);
