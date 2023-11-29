@@ -253,12 +253,21 @@ public class Restaurante implements EnumsFuncionarios{
             double sal = scanner.nextDouble();
             scanner.nextLine();
 
-            System.out.println("\nSelecione o dia de folga do garçom: ");
-            System.out.println("1. Domingo | 2.Segunda-Feira | 3.Terça-feira | 4.Quarta-feira | 5.Quinta-feira | 6.Sexta-feira | 7.Sábado");
+            String dia;
+            EnumsFuncionarios.DiaSemana diaConvertido;
+            do {
+                System.out.println("\nDigite o dia da semana de folga do garçom: ");
+                dia = scanner.nextLine();
 
-            int folga = scanner.nextInt();
+                diaConvertido = converterFolga(dia);
 
-            return new Garcom(nome, end, ecConvertido, nroC, cpf, rg, sal, converterFolga(folga));
+                if(diaConvertido == null){
+                    System.out.println("Dia da semana inválido!");
+                }
+            } while (diaConvertido == null);
+            dia = dia.toUpperCase();
+
+            return new Garcom(nome, end, ecConvertido, nroC, cpf, rg, sal, diaConvertido);
         }
 
         return new Cozinheiro(nome, end, ecConvertido, nroC, cpf, rg);
@@ -285,17 +294,31 @@ public class Restaurante implements EnumsFuncionarios{
         }
     }
 
-    public static EnumsFuncionarios.DiaSemana converterFolga(int folga){
-        return switch (folga){
-            case 1 -> DiaSemana.DOMINGO;
-            case 2 -> DiaSemana.SEGUNDA;
-            case 3 -> DiaSemana.TERCA;
-            case 4 -> DiaSemana.QUARTA;
-            case 5 -> DiaSemana.QUINTA;
-            case 6 -> DiaSemana.SEXTA;
-            case 7 -> DiaSemana.SABADO;
-            default -> null;
-        };
+    public static EnumsFuncionarios.DiaSemana converterFolga(String folga){
+        if(Objects.equals(folga, "SEGUNDA")){
+        return DiaSemana.SEGUNDA;
+        }
+        if(Objects.equals(folga, "TERÇA") || Objects.equals(folga, "TERCA")){
+            return DiaSemana.TERCA;
+        }
+        if(Objects.equals(folga, "QUARTA")){
+            return DiaSemana.QUARTA;
+        }
+        if(Objects.equals(folga, "QUINTA")){
+            return DiaSemana.QUINTA;
+        }
+        if(Objects.equals(folga, "SEXTA")){
+            return DiaSemana.SEXTA;
+        }
+        if(Objects.equals(folga, "SÁBADO") || folga.equals("SABADO")){
+            return DiaSemana.SABADO;
+        }
+        if(Objects.equals(folga, "DOMINGO")){
+            return DiaSemana.DOMINGO;
+        }
+        else {
+            return null;
+        }
     }
 
     public static Ingredientes cadastrarIngrediente(){

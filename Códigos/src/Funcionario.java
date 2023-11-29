@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Funcionario implements EnumsFuncionarios{
     protected String nome;
@@ -64,6 +65,7 @@ public abstract class Funcionario implements EnumsFuncionarios{
     }
 
     public void mostrarFuncionario(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("-- Informacoes de funcionario --");
         System.out.println("Nome: " + nome);
         System.out.println("CPF: " + cpf);
@@ -71,7 +73,7 @@ public abstract class Funcionario implements EnumsFuncionarios{
         System.out.println("Endereço: " + endereco);
         System.out.println("Estado Civil: " + mostrarEstadoCivil());
         System.out.println("Numero da Carteira de Trabalho: " + nroCarteiraTrabalho);
-        System.out.println("Data de admissao: " + dataAdmissao.toString());
+        System.out.println("Data de admissao: " + dataAdmissao.format(formatter));
     }
 
     public String mostrarEstadoCivil() {
