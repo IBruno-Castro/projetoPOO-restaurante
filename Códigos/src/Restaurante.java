@@ -9,6 +9,7 @@ public class Restaurante implements EnumsFuncionarios{
     static SoundTrack sound = new SoundTrack();
 
     public static void main(String[] args){
+        sound.MusicFundo();
 
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Itens> itens = new ArrayList<>();
@@ -47,7 +48,6 @@ public class Restaurante implements EnumsFuncionarios{
         int opcao;
 
         do {
-            sound.MusicFundo();
             System.out.println("BEM-VINDO AO RESTAURANTE\n");
             System.out.println("============== Menu ==============");
             System.out.println("1. Cadastrar Funcionário");
@@ -63,6 +63,7 @@ public class Restaurante implements EnumsFuncionarios{
             switch (opcao) {
                 case 1:
                     funcionarios.add(cadastrarFuncionario());
+                    sound.MusicConcluido();
                     funcionarios.get(funcionarios.size() - 1).mostrarFuncionario();
                     break;
                 case 2:
