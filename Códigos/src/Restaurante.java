@@ -54,6 +54,9 @@ public class Restaurante implements EnumsFuncionarios{
             System.out.println("2. Cadastrar Ingrediente");
             System.out.println("3. Cadastrar Item");
             System.out.println("4. Cadastrar Pedido");
+            System.out.println("5. Checar Item");
+            System.out.println("6. Checar Funcionário");
+            System.out.println("7. Checar Pedido");
             System.out.println("0. Sair");
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
@@ -181,6 +184,12 @@ public class Restaurante implements EnumsFuncionarios{
                         System.out.println(e.getMessage());
                     }
                     break;
+                case 5:
+                    mostrarItens(itens);
+                case 6:
+                    mostrarFuncionarios(funcionarios);
+                case 7: 
+                    mostrarPedidos(pedidos);
                 case 0:
                     System.out.println("Saindo do programa. Até mais!");
                     break;
@@ -474,4 +483,64 @@ public class Restaurante implements EnumsFuncionarios{
     /*public static void fecharMes(){
 
     }*/
+
+    public static void mostrarItens(ArrayList<Itens> itens){
+        String input;
+        int op;
+        do {
+            System.out.println("\nLista de itens: ");
+            for (int index = 0; index < itens.size(); index++) {
+                System.out.println(index + "." + itens.get(index).getNome());
+            }
+
+            System.out.println("Digite o index do item para mais informacoes: ");
+            op = scanner.nextInt();
+            scanner.nextLine();
+
+            itens.get(op).mostrarItem();
+
+            System.out.println("Deseja verificar outro item?");
+            input = scanner.nextLine();
+        } while (!input.equals("n"));
+    }
+
+    public static void mostrarFuncionarios(ArrayList<Funcionario> funcionarios){
+        String input;
+        int op;
+        do {
+            System.out.println("\nLista de funcionarios: ");
+            for (int index = 0; index < funcionarios.size(); index++) {
+                System.out.println(index + "." + funcionarios.get(index).getNome());
+            }
+
+            System.out.println("Digite o index do funcionario para mais informacoes: ");
+            op = scanner.nextInt();
+            scanner.nextLine();
+
+            funcionarios.get(op).mostrarFuncionario();
+
+            System.out.println("Deseja verificar outro funcionario?");
+            input = scanner.nextLine();
+        } while (!input.equals("n"));
+    }
+
+    public static void mostrarPedidos(ArrayList<Pedido> pedidos){
+        String input;
+        int op;
+        do {
+            System.out.println("\nLista de pedidos: ");
+            for (int index = 0; index < pedidos.size(); index++) {
+                System.out.println("Pedido " + index);
+            }
+
+            System.out.println("Digite o numero do pedido para mais informacoes: ");
+            op = scanner.nextInt();
+            scanner.nextLine();
+
+            pedidos.get(op).mostrarPedido();
+
+            System.out.println("Deseja verificar outro pedido?");
+            input = scanner.nextLine();
+        } while (!input.equals("n"));
+    }
 }
