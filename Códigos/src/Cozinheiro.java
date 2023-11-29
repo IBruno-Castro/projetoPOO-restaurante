@@ -3,10 +3,8 @@ import java.util.List;
 
 public class Cozinheiro extends Funcionario{
     private List<Prato> listaPratos = new ArrayList<Prato>();
-
     private static double pratoP = 30;
     private static double sobremesa = 20;
-
     private int qtdSobremesa;
     private int qtdPrincipal;
 
@@ -20,12 +18,12 @@ public class Cozinheiro extends Funcionario{
         return pratoP*qtdPrincipal + sobremesa*qtdSobremesa;
     }
 
-    public void increaseSobremesa(){
-        qtdSobremesa++;
+    public void increaseSobremesa(int n){
+        qtdSobremesa += n;
     }
 
-    public void increasePrincipal(){
-        qtdPrincipal++;
+    public void increasePrincipal(int n){
+        qtdPrincipal += n;
     }
 
     public void addPrato(Prato prato){
