@@ -71,4 +71,21 @@ public class Garcom extends Funcionario {
                 return "Dia inválido";
         }
     }
+
+    public void verificarPerformance(int nroPedidosAtendidos, int nroPedidosTotais){
+        if(nroPedidosAtendidos < (nroPedidosTotais * 0.05)){
+            nroPedidos++;
+        } else {
+            nroPedidos = 0;
+        }
+    }
+
+    public boolean verificarDemissao(){
+        if(nroPedidos >= 3){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
