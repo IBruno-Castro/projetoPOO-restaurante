@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Cozinheiro extends Funcionario{
     private List<Prato> listaPratos = new ArrayList<Prato>();
-
     private static double pratoP = 30;
     private static double sobremesa = 20;
     private int qtdSobremesa;
