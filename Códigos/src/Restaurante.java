@@ -167,11 +167,12 @@ public class Restaurante implements EnumsFuncionarios{
 
                             if(itens.get(op) instanceof PratoPrincipal){
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
-                                cozinheiro.increasePrincipal();
+                                cozinheiro.increasePrincipal(qtd);
                             }
+                            
                             if (itens.get(op) instanceof Sobremesa) {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
-                                cozinheiro.increaseSobremesa();
+                                cozinheiro.increaseSobremesa(qtd);
                             }
                             
                             ItemPedido item = new ItemPedido(itens.get(op), qtd);

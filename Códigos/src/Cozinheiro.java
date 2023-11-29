@@ -20,12 +20,12 @@ public class Cozinheiro extends Funcionario{
         return pratoP*qtdPrincipal + sobremesa*qtdSobremesa;
     }
 
-    public void increaseSobremesa(){
-        qtdSobremesa++;
+    public void increaseSobremesa(int n){
+        qtdSobremesa += n;
     }
 
-    public void increasePrincipal(){
-        qtdPrincipal++;
+    public void increasePrincipal(int n){
+        qtdPrincipal += n;
     }
 
     public void addPrato(Prato prato){
