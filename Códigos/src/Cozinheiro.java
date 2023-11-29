@@ -7,12 +7,25 @@ public class Cozinheiro extends Funcionario{
     private static double pratoP = 30;
     private static double sobremesa = 20;
 
+    private int qtdSobremesa;
+    private int qtdPrincipal;
+
     public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
+        qtdPrincipal = 0;
+        qtdSobremesa = 0;
     }
 
-    public float calcularSalario() {
-        return 0;
+    public double calcularSalario() {
+        return pratoP*qtdPrincipal + sobremesa*qtdSobremesa;
+    }
+
+    public void increaseSobremesa(){
+        qtdSobremesa++;
+    }
+
+    public void increasePrincipal(){
+        qtdPrincipal++;
     }
 
     public void addPrato(Prato prato){

@@ -35,7 +35,7 @@ public abstract class Funcionario implements EnumsFuncionarios{
         this.dataAdmissao = LocalDateTime.now();
     }
 
-    public abstract float calcularSalario();
+    public abstract double calcularSalario();
 
     public String getCpf() {
         return cpf;

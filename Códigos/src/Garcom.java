@@ -5,6 +5,7 @@ public class Garcom extends Funcionario {
     private EnumsFuncionarios.DiaSemana diaFolga;
     
     private static double limite = 100;
+    private static int nroPedidos = 0;
 
     public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
@@ -12,8 +13,16 @@ public class Garcom extends Funcionario {
         this.diaFolga = diaFolga;
     }
 
-    public float calcularSalario(){
-        return 0;
+    public double calcularSalario(){
+        return salarioBase;
+    }
+
+    public double calcularSalario(int nroPedidos){
+        if(nroPedidos < limite){
+            return salarioBase;
+        } else {
+            return salarioBase + 2000;
+        }
     }
 
     public double getSalarioBase() {

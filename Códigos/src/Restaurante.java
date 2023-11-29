@@ -9,13 +9,13 @@ public class Restaurante implements EnumsFuncionarios{
     static SoundTrack sound = new SoundTrack();
 
     public static void main(String[] args){
-
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Itens> itens = new ArrayList<>();
         ArrayList<Pedido> pedidos = new ArrayList<>();
         ArrayList<Ingredientes> ingredientes = new ArrayList<>();
 
-        
+        int nroPedidos = 0;
+
         try {
             // Bebida instances
             itens.add(new Bebida("Nome1", 10.0, 5.0, itens, "TipoEmbalagem1", "TamanhoEmbalagem1"));
@@ -165,6 +165,15 @@ public class Restaurante implements EnumsFuncionarios{
                             int qtd = scanner.nextInt();
                             scanner.nextLine();
 
+                            if(itens.get(op) instanceof PratoPrincipal){
+                                Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
+                                cozinheiro.increasePrincipal();
+                            }
+                            if (itens.get(op) instanceof Sobremesa) {
+                                Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
+                                cozinheiro.increaseSobremesa();
+                            }
+                            
                             ItemPedido item = new ItemPedido(itens.get(op), qtd);
                             pedidos.get(pedidos.size() - 1).adicionarItem(item);
 
@@ -180,6 +189,8 @@ public class Restaurante implements EnumsFuncionarios{
                         pedidos.get(pedidos.size() - 1).confirmarPagamento();
 
                         pedidos.get(pedidos.size() - 1).mostrarPedido();
+
+                        nroPedidos++;
                     } catch (PagamentoException e) {
                         System.out.println(e.getMessage());
                     }
