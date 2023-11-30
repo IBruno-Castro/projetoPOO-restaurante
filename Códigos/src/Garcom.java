@@ -2,13 +2,13 @@ import java.lang.IllegalArgumentException;
 
 public class Garcom extends Funcionario {
     private double salarioBase;
-    private EnumsFuncionarios.DiaSemana diaFolga;
+    private EnumsGerais.DiaSemana diaFolga;
     private int advertencias = 0;
     private int nroPedidosAtendidos = 0;
     
     private static double limite = 3;
 
-    public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
+    public Garcom(String nome, String endereco, EnumsGerais.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsGerais.DiaSemana diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
         this.salarioBase = salarioBase;
         this.diaFolga = diaFolga;
@@ -38,11 +38,11 @@ public class Garcom extends Funcionario {
         }
     }
 
-    public EnumsFuncionarios.DiaSemana getDiaFolga() {
+    public EnumsGerais.DiaSemana getDiaFolga() {
         return diaFolga;
     }
 
-    public void setDiaFolga(EnumsFuncionarios.DiaSemana diaFolga) {
+    public void setDiaFolga(EnumsGerais.DiaSemana diaFolga) {
         this.diaFolga = diaFolga;
     }
 

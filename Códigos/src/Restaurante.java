@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Restaurante implements EnumsFuncionarios{
+public class Restaurante implements EnumsGerais{
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
     static SoundTrack sound = new SoundTrack();
@@ -255,7 +255,7 @@ public class Restaurante implements EnumsFuncionarios{
         String end = scanner.nextLine();
 
         String ec;
-        EnumsFuncionarios.EstadoCivil ecConvertido;
+        EnumsGerais.EstadoCivil ecConvertido;
         do {
             System.out.print("\nDigite o estado civil do funcionário: ");
             ec = scanner.nextLine();
@@ -278,7 +278,7 @@ public class Restaurante implements EnumsFuncionarios{
             scanner.nextLine();
 
             String dia;
-            EnumsFuncionarios.DiaSemana diaConvertido;
+            EnumsGerais.DiaSemana diaConvertido;
             do {
                 System.out.println("\nDigite o dia da semana de folga do garçom: ");
                 dia = scanner.nextLine();
@@ -297,7 +297,7 @@ public class Restaurante implements EnumsFuncionarios{
         return new Cozinheiro(nome, end, ecConvertido, nroC, cpf, rg);
     }
 
-    public static EnumsFuncionarios.EstadoCivil converterEstadoCivil(String ec){
+    public static EnumsGerais.EstadoCivil converterEstadoCivil(String ec){
         if(Objects.equals(ec, "SOLTEIRO") || Objects.equals(ec, "SOLTEIRA")){
             return EstadoCivil.SOLTEIRA;
         }
@@ -318,7 +318,7 @@ public class Restaurante implements EnumsFuncionarios{
         }
     }
 
-    public static EnumsFuncionarios.DiaSemana converterFolga(String folga){
+    public static EnumsGerais.DiaSemana converterFolga(String folga){
         if(Objects.equals(folga, "SEGUNDA")){
         return DiaSemana.SEGUNDA;
         }

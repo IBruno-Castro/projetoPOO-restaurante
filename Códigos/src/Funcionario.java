@@ -1,12 +1,12 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Funcionario implements EnumsFuncionarios{
+public abstract class Funcionario implements EnumsGerais{
     protected String nome;
     protected String cpf;
     protected String rg;
     protected String endereco;
-    protected EnumsFuncionarios.EstadoCivil estadoCivil;
+    protected EnumsGerais.EstadoCivil estadoCivil;
     protected int nroCarteiraTrabalho;
     protected LocalDateTime dataAdmissao;
 
@@ -25,7 +25,7 @@ public abstract class Funcionario implements EnumsFuncionarios{
         this.cpf = cpf;
     }
 
-    public Funcionario(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
+    public Funcionario(String nome, String endereco, EnumsGerais.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         this.endereco = endereco;
         this.estadoCivil = estadoCivil;
         this.nome = nome;
@@ -49,7 +49,7 @@ public abstract class Funcionario implements EnumsFuncionarios{
         return endereco;
     }
 
-    public EnumsFuncionarios.EstadoCivil getEstadoCivil() {
+    public EnumsGerais.EstadoCivil getEstadoCivil() {
         return estadoCivil;
     }
 
