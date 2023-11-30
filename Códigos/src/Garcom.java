@@ -2,18 +2,28 @@ import java.lang.IllegalArgumentException;
 
 public class Garcom extends Funcionario {
     private double salarioBase;
-    private EnumsFuncionarios.DiaSemana diaFolga;
+    private EnumsGerais.DiaSemana diaFolga;
+    private int advertencias = 0;
+    private int nroPedidosAtendidos = 0;
     
-    private static double limite = 100;
+    private static double limite = 3;
 
-    public Garcom(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsFuncionarios.DiaSemana diaFolga){
+    public Garcom(String nome, String endereco, EnumsGerais.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg, double salarioBase, EnumsGerais.DiaSemana diaFolga){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
         this.salarioBase = salarioBase;
         this.diaFolga = diaFolga;
     }
 
-    public float calcularSalario(){
-        return 0;
+    public double calcularSalario(){
+        return salarioBase;
+    }
+
+    public double calcularSalario(int nroPedidos){
+        if(nroPedidos < limite){
+            return salarioBase;
+        } else {
+            return salarioBase + 2000;
+        }
     }
 
     public double getSalarioBase() {
@@ -28,16 +38,18 @@ public class Garcom extends Funcionario {
         }
     }
 
-    public EnumsFuncionarios.DiaSemana getDiaFolga() {
+    public EnumsGerais.DiaSemana getDiaFolga() {
         return diaFolga;
     }
 
-    public void setDiaFolga(EnumsFuncionarios.DiaSemana diaFolga) {
+    public void setDiaFolga(EnumsGerais.DiaSemana diaFolga) {
         this.diaFolga = diaFolga;
     }
 
     public void mostrarFuncionario() {
         super.mostrarFuncionario();
+        System.out.println("Numero de pedidos atendidos: " + nroPedidosAtendidos);
+        System.out.println("Advertências: " + advertencias);
         System.out.println("Salario base: " + salarioBase);
         System.out.println("Dia de folga: " + mostrarDia());
     }
@@ -62,4 +74,29 @@ public class Garcom extends Funcionario {
                 return "Dia inválido";
         }
     }
+
+    public void registrarPedido(){
+        nroPedidosAtendidos++;
+    }
+
+    public int getNroPedidosAtendidos(){
+        return nroPedidosAtendidos;
+    }
+
+    public void verificarPerformance(int nroPedidosTotais){
+        if(this.nroPedidosAtendidos < (nroPedidosTotais * 0.05)){
+            advertencias++;
+        } else {
+            advertencias = 0;
+        }
+    }
+
+    public boolean verificarDemissao(){
+        if(advertencias >= 3){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+

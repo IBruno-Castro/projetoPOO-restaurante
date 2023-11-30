@@ -43,11 +43,11 @@ public class Pedido {
         this.formaPag = formaPag;
     }
 
-    /*public void calcularValorTotal() {
+    public void calcularValorTotal() {
         for (ItemPedido item : itens) {
-            //this.valorTotal += item./getItem().getPrecoUni() * item.getQtd();
+            this.valorTotal += item.getItem().getPrecoUnitario() * item.getQtd();
         }
-    }*/
+    }
 
     public void adicionarItem(ItemPedido item) {
         itens.add(item);

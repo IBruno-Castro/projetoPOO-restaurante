@@ -3,16 +3,27 @@ import java.util.List;
 
 public class Cozinheiro extends Funcionario{
     private List<Prato> listaPratos = new ArrayList<Prato>();
-
     private static double pratoP = 30;
     private static double sobremesa = 20;
+    private int qtdSobremesa;
+    private int qtdPrincipal;
 
-    public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
+    public Cozinheiro(String nome, String endereco, EnumsGerais.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
+        qtdPrincipal = 0;
+        qtdSobremesa = 0;
     }
 
-    public float calcularSalario() {
-        return 0;
+    public double calcularSalario() {
+        return pratoP*qtdPrincipal + sobremesa*qtdSobremesa;
+    }
+
+    public void increaseSobremesa(int n){
+        qtdSobremesa += n;
+    }
+
+    public void increasePrincipal(int n){
+        qtdPrincipal += n;
     }
 
     public void addPrato(Prato prato){
