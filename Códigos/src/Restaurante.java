@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Restaurante implements EnumsGerais {
@@ -10,41 +9,12 @@ public class Restaurante implements EnumsGerais {
     public static void main(String[] args) {
         sound.MusicFundo();
 
-        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
         ArrayList<Itens> itens = (ArrayList<Itens>) lerArquivoItens();
-        ArrayList<Pedido> pedidos = new ArrayList<>();
-        ArrayList<Ingredientes> ingredientes = new ArrayList<>();
+        ArrayList<Pedido> pedidos = (ArrayList<Pedido>) lerArquivoPedido();
+        ArrayList<Ingredientes> ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
 
         int nroPedidos = 0;
-
-        try {
-            // Bebida instances
-            itens.add(new Bebida("Nome1", 10.0, 5.0, itens, EmbalagemBebidas.OUTROS, 250));
-            itens.add(new Bebida("Nome2", 15.0, 8.0, itens, EmbalagemBebidas.OUTROS, 250));
-
-            // Sobremesa instances
-            itens.add(new Sobremesa("Nome1", "Descricao1", 20.0, 12.0, 7.0,  13000.0,itens));
-            itens.add(new Sobremesa("Nome2", "Descricao2", 25.0, 18.0, 10.0, 1200.0, itens));
-
-            // PratoPrincipal instances
-            itens.add(new PratoPrincipal("Nome1", "Descricao1", 30.0, 25.0, 15.0, itens));
-            itens.add(new PratoPrincipal("Nome2", "Descricao2", 35.0, 30.0, 20.0, itens));
-        } catch (ErroCodigoException e) {
-            System.out.println(e);
-        }
-
-        // Cozinheiro instances
-        funcionarios.add(new Cozinheiro("Nome1", "Endereco1", EstadoCivil.DIVORCIADA, 4, "CPF1", "RG1"));
-        funcionarios.add(new Cozinheiro("Nome2", "Endereco2", EstadoCivil.CASADA, 3, "CPF2", "RG2"));
-
-        // Garcom instances
-        funcionarios.add(new Garcom("Nome1", "Endereco1", EstadoCivil.DIVORCIADA, 2, "CPF1", "RG1", 1500, DiaSemana.SEXTA));
-        funcionarios.add(new Garcom("Nome2", "Endereco2", EstadoCivil.CASADA, 1, "CPF2", "RG2", 1800, DiaSemana.DOMINGO));
-
-        // Ingredientes instances
-        ingredientes.add(new Ingredientes("NomeIngrediente1", "Quantidade1"));
-        ingredientes.add(new Ingredientes("NomeIngrediente2", "Quantidade2"));
-
         int opcao;
 
         do {
@@ -57,7 +27,8 @@ public class Restaurante implements EnumsGerais {
             System.out.println("5. Checar Item");
             System.out.println("6. Checar Funcionário");
             System.out.println("7. Checar Pedido");
-            System.out.println("8. Fechar mês");
+            System.out.println("8. Checar Ingredientes");
+            System.out.println("9. Fechar mês");
             System.out.println("0. Sair");
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
@@ -68,17 +39,17 @@ public class Restaurante implements EnumsGerais {
             int op;
 
             switch (opcao) {
-                case 1:
+                case 1 -> {
                     funcionarios.add(cadastrarFuncionario());
                     sound.MusicConcluido();
-                    if(funcionarios.get(funcionarios.size() - 1) instanceof Cozinheiro){
-                        
+                    if (funcionarios.get(funcionarios.size() - 1) instanceof Cozinheiro) {
+
                         System.out.println("Adicione pratos preparados pelo cozinheiro");
-                        do{
+                        do {
                             do {
                                 System.out.println("\nLista de pratos: ");
                                 for (int index = 0; index < itens.size(); index++) {
-                                    if(itens.get(index) instanceof Prato){
+                                    if (itens.get(index) instanceof Prato) {
                                         System.out.println(index + "." + itens.get(index).getNome());
                                     }
                                 }
@@ -93,26 +64,28 @@ public class Restaurante implements EnumsGerais {
                                 escolha = scanner.nextLine();
                             } while (!escolha.equals("s"));
 
-                            ((Cozinheiro) funcionarios.get(funcionarios.size() - 1)).addPrato((Prato)itens.get(op));
+                            ((Cozinheiro) funcionarios.get(funcionarios.size() - 1)).addPrato((Prato) itens.get(op));
                             sound.MusicConcluido();
 
                             System.out.println("Quer adicionar outro prato? s/n");
                             escolha = scanner.nextLine();
-                        } while(!escolha.equals("n"));
+                        } while (!escolha.equals("n"));
                     }
+                    escreverNoArquivoFuncionarios(funcionarios.get(funcionarios.size() - 1));
                     funcionarios.get(funcionarios.size() - 1).mostrarFuncionario();
-                    break;
-                case 2:
-                    ingredientes.add(cadastrarIngrediente());
+                }
+                case 2 -> {
+                    escreverNoArquivoIngredientes(cadastrarIngrediente());
                     sound.MusicConcluido();
+                    ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
                     ingredientes.get(ingredientes.size() - 1).mostrarIngrediente();
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     try {
-                        itens.add(cadastrarItens(itens, ingredientes));
+                        itens.add(cadastrarItens(itens));
                         sound.MusicConcluido();
-                        if(itens.get(itens.size() - 1) instanceof Prato){
-                            do{
+                        if (itens.get(itens.size() - 1) instanceof Prato) {
+                            do {
                                 do {
                                     System.out.println("\nLista ingredientes: ");
                                     for (int index = 0; index < ingredientes.size(); index++) {
@@ -134,21 +107,21 @@ public class Restaurante implements EnumsGerais {
 
                                 System.out.println("Quer adicionar outro ingrediente? s/n");
                                 escolha = scanner.nextLine();
-                            } while(!escolha.equals("n"));
+                            } while (!escolha.equals("n"));
                         }
 
+                        escreverNoArquivoItens(itens.get(itens.size() - 1)); // escreve o item no arquivo já com ingredientes
                         itens.get(itens.size() - 1).mostrarItem();
                     } catch (ErroCodigoException e) {
                         System.out.println(e.getMessage());
                     }
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     try {
                         pedidos.add(cadastrarPedido(funcionarios));
                         sound.MusicConcluido();
 
-                        do
-                        {
+                        do {
                             do {
                                 System.out.println("\nLista itens: ");
                                 for (int index = 0; index < itens.size(); index++) {
@@ -163,13 +136,13 @@ public class Restaurante implements EnumsGerais {
 
                                 System.out.println("Confirmar item? s/n");
                                 escolha = scanner.nextLine();
-                            } while(!escolha.equals("s"));
-                            
+                            } while (!escolha.equals("s"));
+
                             System.out.println("Digite a quantidade deseja adicionar: ");
                             int qtd = scanner.nextInt();
                             scanner.nextLine();
 
-                            if(itens.get(op) instanceof PratoPrincipal){
+                            if (itens.get(op) instanceof PratoPrincipal) {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increasePrincipal(qtd);
                             }
@@ -178,13 +151,13 @@ public class Restaurante implements EnumsGerais {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increaseSobremesa(qtd);
                             }
-                            
+
                             ItemPedido item = new ItemPedido(itens.get(op), qtd);
                             pedidos.get(pedidos.size() - 1).adicionarItem(item);
 
                             System.out.println("Deseja adicionar outro item? s/n");
                             escolha = scanner.nextLine();
-                        } while(escolha.equals("s"));
+                        } while (escolha.equals("s"));
 
                         pedidos.get(pedidos.size() - 1).calcularValorTotal();
 
@@ -193,27 +166,37 @@ public class Restaurante implements EnumsGerais {
                         pedidos.get(pedidos.size() - 1).setFormaPag(formaPag);
                         pedidos.get(pedidos.size() - 1).confirmarPagamento();
 
+                        escreverNoArquivoPedido(pedidos.get(pedidos.size() - 1));
                         pedidos.get(pedidos.size() - 1).mostrarPedido();
 
                         nroPedidos++;
                     } catch (PagamentoException e) {
                         System.out.println(e.getMessage());
                     }
-                    break;
-                case 5:
-                    //mostrarItens(itens);
-                    break;
-                case 6:
+                }
+                case 5 -> {
+                    itens = (ArrayList<Itens>) lerArquivoItens();
+                    mostrarItens(itens);
+                }
+                case 6 -> {
+                    funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
                     mostrarFuncionarios(funcionarios);
-                case 7: 
+                }
+                case 7 -> {
+                    pedidos = (ArrayList<Pedido>) lerArquivoPedido();
                     mostrarPedidos(pedidos);
-                case 8:
-                    fecharMes(funcionarios, nroPedidos);
-                case 0:
-                    System.out.println("Saindo do programa. Até mais!");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                }
+                case 8 -> { // mostrar ingredientes
+                    System.out.println("Ingredientes cadastrados: \n");
+                    ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
+                    for (Ingredientes ingrediente : ingredientes) {
+                        ingrediente.mostrarIngrediente();
+                        System.out.print("\n");
+                    }
+                }
+                case 9 -> fecharMes(funcionarios, nroPedidos);
+                case 0 -> System.out.println("Saindo do programa. Até mais!");
+                default -> System.out.println("Opção inválida. Tente novamente.");
             }
         } while (opcao != 0);
         
@@ -367,9 +350,9 @@ public class Restaurante implements EnumsGerais {
         return new Ingredientes(nome, qtd);
     }
 
-    public static Itens cadastrarItens(ArrayList<Itens> itens, ArrayList<Ingredientes> ingredientes) throws ErroCodigoException{
+    public static Itens cadastrarItens(ArrayList<Itens> itens) throws ErroCodigoException{
         System.out.println("CADASTRAMENTO DE ITENS\n");
-        Itens item = null;
+        Itens item;
 
         sleep.Sleeping(1000);
 
@@ -436,7 +419,6 @@ public class Restaurante implements EnumsGerais {
             item = new Bebida(nome, precoUnitario, precoCusto, itens, embalagemConvertida, tamanhoEmbalagem);
         }
 
-        escreverNoArquivoItens(item);
         return item;
     }
 
@@ -460,8 +442,8 @@ public class Restaurante implements EnumsGerais {
 
     public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios){
         System.out.println("CADASTRAMENTO DE PEDIDOS\n");
-        Garcom garcom = null;
-        Cozinheiro cozinheiro = null;
+        Garcom garcom;
+        Cozinheiro cozinheiro;
 
         sleep.Sleeping(1000);
 
@@ -594,7 +576,7 @@ public class Restaurante implements EnumsGerais {
                 System.out.println("Pedido " + index);
             }
 
-            System.out.println("Digite o numero do pedido para mais informacoes: ");
+            System.out.println("Digite o numero do pedido para mais informações: ");
             op = scanner.nextInt();
             scanner.nextLine();
 
@@ -634,11 +616,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+            System.out.println("O item foi cadastrado no sistema.");
 
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao cadastrar: " + e.getMessage());
         }
     }
 
@@ -704,7 +685,7 @@ public class Restaurante implements EnumsGerais {
             List<Funcionario> objetos = lerArquivoFuncionario();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("funcionario.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -714,11 +695,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+            System.out.println("O funcionário foi cadastrado no sistema.");
 
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao cadastrar: " + e.getMessage());
         }
     }
 
@@ -726,7 +706,7 @@ public class Restaurante implements EnumsGerais {
         List<Funcionario> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("itens.bin");
+            FileInputStream fileIn = new FileInputStream("funcionario.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Funcionario objetoLido;
@@ -761,7 +741,7 @@ public class Restaurante implements EnumsGerais {
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("funcionario.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever os objetos atualizados no arquivo
@@ -784,7 +764,7 @@ public class Restaurante implements EnumsGerais {
             List<Ingredientes> objetos = lerArquivoIngredientes();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("ingredientes.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -794,11 +774,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+            System.out.println("O ingrediente foi armazenado no sistema.");
 
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao armazenar: " + e.getMessage());
         }
     }
 
@@ -806,7 +785,7 @@ public class Restaurante implements EnumsGerais {
         List<Ingredientes> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("itens.bin");
+            FileInputStream fileIn = new FileInputStream("ingredientes.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Ingredientes objetoLido;
@@ -841,7 +820,7 @@ public class Restaurante implements EnumsGerais {
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("ingredientes.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever os objetos atualizados no arquivo
@@ -864,7 +843,7 @@ public class Restaurante implements EnumsGerais {
             List<Pedido> objetos = lerArquivoPedido();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("pedido.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -874,11 +853,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+            System.out.println("O pedido foi armazenado no sistema.");
 
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println("Ocorreu um erro ao armazenar o pedido no sistema: " + e.getMessage());
         }
     }
 
@@ -886,7 +864,7 @@ public class Restaurante implements EnumsGerais {
         List<Pedido> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("itens.bin");
+            FileInputStream fileIn = new FileInputStream("pedido.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Pedido objetoLido;

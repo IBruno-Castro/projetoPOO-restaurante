@@ -1,8 +1,13 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Pedido {
+public class Pedido implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private ArrayList<ItemPedido> itens = new ArrayList<>();
     private float valorTotal;
     private LocalDateTime dataPedido;
