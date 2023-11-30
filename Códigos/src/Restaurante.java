@@ -425,7 +425,7 @@ public class Restaurante implements EnumsFuncionarios{
         return item;
     }
 
-    public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios){
+    public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios) throws PagamentoException {
         System.out.println("CADASTRAMENTO DE PEDIDOS\n");
         Garcom garcom = null;
         Cozinheiro cozinheiro = null;
