@@ -209,19 +209,22 @@ public class Restaurante implements EnumsGerais {
                     switch (exc) {
                         case 1 -> {
                             System.out.println("Digite o nome do funcionário: ");
-                            String nome = scanner.nextLine();
+                            scanner.nextLine();
+                            String nome = scanner.next();
                             excluirObjetoFuncionario(nome);
                             funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
                         }
                         case 2 -> {
                             System.out.println("Digite o nome do item: ");
-                            String nome = scanner.nextLine();
+                            scanner.nextLine();
+                            String nome = scanner.next();
                             excluirObjetoItens(nome);
                             itens = (ArrayList<Itens>) lerArquivoItens();
                         }
                         case 3 -> {
                             System.out.println("Digite o nome do ingrediente: ");
-                            String nome = scanner.nextLine();
+                            scanner.nextLine();
+                            String nome = scanner.next();
                             excluirObjetoIngredientes(nome);
                             ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
                         }
