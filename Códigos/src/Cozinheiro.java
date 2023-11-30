@@ -1,7 +1,11 @@
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cozinheiro extends Funcionario{
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private List<Prato> listaPratos = new ArrayList<Prato>();
     private static double pratoP = 30;
     private static double sobremesa = 20;
