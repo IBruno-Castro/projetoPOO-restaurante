@@ -32,11 +32,11 @@ public class Cozinheiro extends Funcionario{
 
     public void addPrato(Prato prato){
         listaPratos.add(prato);
-        System.out.println(prato.getNome() + "adicionado a lista de pratos do cozinheiro.");
+        System.out.println(prato.getNome() + " foi adicionado a lista de pratos do cozinheiro!");
     }
 
     public void mostrarPratos(){
-        System.out.println("Lista de pratos preparados por " + nome);
+        System.out.println("\nLista de pratos preparados pelo cozinheiro " + nome + ": ");
         for (Prato prato : listaPratos) {
             prato.mostrarItem();
         }

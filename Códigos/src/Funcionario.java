@@ -72,7 +72,7 @@ public abstract class Funcionario implements EnumsGerais, Serializable {
 
     public void mostrarFuncionario(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println("-- Informacoes de funcionario --");
+        System.out.println("\nInformações de funcionário: \n");
         System.out.println("Nome: " + nome);
         System.out.println("CPF: " + cpf);
         System.out.println("RG: " + rg);

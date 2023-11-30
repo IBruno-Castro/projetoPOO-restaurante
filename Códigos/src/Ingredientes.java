@@ -29,6 +29,7 @@ public class Ingredientes implements Serializable {
     }
 
     public void mostrarIngrediente() {
+        System.out.println("\nInformações do ingrediente: \n");
         System.out.println("Nome: " + getNome());
         System.out.println("Quantidade: " + getQuantidade());
     }

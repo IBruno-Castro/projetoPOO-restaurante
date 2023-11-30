@@ -6,15 +6,23 @@ public class Restaurante implements EnumsGerais {
     public static SleepMetod sleep = new SleepMetod();
     public static SoundTrack sound = new SoundTrack();
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\033[0;30m";   // BLACK
-    public static final String ANSI_RED = "\033[0;31m";     // RED
-    public static final String ANSI_GREEN = "\033[0;32m";   // GREEN
-    public static final String ANSI_YELLOW = "\033[0;33m";  // YELLOW
-    public static final String ANSI_BLUE = "\033[0;34m";    // BLUE
-    public static final String ANSI_PURPLE = "\033[0;35m";  // PURPLE
-    public static final String ANSI_CYAN = "\033[0;36m";    // CYAN
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
 
     public static void main(String[] args) {
+        sleep.Sleeping(700);
+
+        System.out.println(ANSI_GREEN + "\nBEM-VINDO AO RESTAURANTE BRASIL BOSSA-NOVA!\n" + ANSI_RESET);
+
+        System.out.println("\nConfigurando a playlist do restaurante...\n");
+
+        sleep.Sleeping(1000);
+
         sound.MusicFundo();
 
         ArrayList<Funcionario> funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
@@ -25,22 +33,25 @@ public class Restaurante implements EnumsGerais {
         int nroPedidos = 0;
         int opcao;
 
+        sleep.Sleeping(1000);
+
         do {
-            System.out.println("============== Menu ==============" + ANSI_RESET);
-            System.out.println("1. Cadastrar Funcionário");
-            System.out.println("2. Cadastrar Ingrediente");
-            System.out.println("3. Cadastrar Item");
-            System.out.println("4. Cadastrar Pedido");
-            System.out.println("5. Checar Item");
-            System.out.println("6. Checar Funcionário");
-            System.out.println("7. Checar Pedido");
-            System.out.println("8. Checar Ingredientes");
-            System.out.println("9. Fechar mês");
-            System.out.println("10. Excluir do sistema");
-            System.out.println("0. Sair");
-            System.out.println("==================================");
-            System.out.print("Escolha uma opção: ");
+            System.out.println(ANSI_YELLOW + "\n_____________ MENU À LA CARTE _______________\n" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "       1. Cadastrar funcionário" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "       2. Cadastrar ingrediente" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "       3. Cadastrar item" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "       4. Fazer um pedido" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "       5. Checar item" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "       6. Checar funcionário" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "       7. Checar pedido" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "       8. Checar ingredientes" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "       9. Fechar mês" + ANSI_RESET);
+            System.out.println(ANSI_RED + "       10. Excluir do sistema" + ANSI_RESET);
+            System.out.println(ANSI_RED + "       0. Sair\n" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "_____________________________________________" + ANSI_RESET);
+            System.out.print(ANSI_GREEN + "\nEscolha uma opção: " + ANSI_RESET);
             opcao = scanner.nextInt();
+
             scanner.nextLine();
 
             String escolha;
@@ -52,32 +63,34 @@ public class Restaurante implements EnumsGerais {
                     sound.MusicConcluido();
                     if (funcionarios.get(funcionarios.size() - 1) instanceof Cozinheiro) {
 
-                        System.out.println("Adicione pratos preparados pelo cozinheiro");
+                        System.out.println("\nAdicione pratos preparados pelo cozinheiro");
                         do {
                             do {
-                                System.out.println("\nLista de pratos: ");
+                                System.out.println("\nLista de pratos: \n");
                                 for (int index = 0; index < itens.size(); index++) {
                                     if (itens.get(index) instanceof Prato) {
                                         System.out.println(index + "." + itens.get(index).getNome());
                                     }
                                 }
 
-                                System.out.println("Digite o index do prato para adicioná-lo na lista do cozinheiro: ");
+                                System.out.println("\nDigite quais das opções de prato deseja adicionar na lista do cozinheiro: ");
                                 op = scanner.nextInt();
                                 scanner.nextLine();
 
                                 itens.get(op).mostrarItem();
 
-                                System.out.println("Adicionar o prato? s/n");
+                                System.out.println("\nAdicionar o prato?");
                                 escolha = scanner.nextLine();
-                            } while (!escolha.equals("s"));
+                                escolha = escolha.toUpperCase();
+                            } while (!escolha.equals("SIM"));
 
                             ((Cozinheiro) funcionarios.get(funcionarios.size() - 1)).addPrato((Prato) itens.get(op));
                             sound.MusicConcluido();
 
-                            System.out.println("Quer adicionar outro prato? s/n");
+                            System.out.println("\nQuer adicionar outro prato?");
                             escolha = scanner.nextLine();
-                        } while (!escolha.equals("n"));
+                            escolha = escolha.toUpperCase();
+                        } while (!escolha.equals("NÃO") && !escolha.equals("NAO"));
                     }
                     escreverNoArquivoFuncionarios(funcionarios.get(funcionarios.size() - 1));
                     funcionarios.get(funcionarios.size() - 1).mostrarFuncionario();
@@ -95,27 +108,29 @@ public class Restaurante implements EnumsGerais {
                         if (itens.get(itens.size() - 1) instanceof Prato) {
                             do {
                                 do {
-                                    System.out.println("\nLista ingredientes: ");
+                                    System.out.println("\nLista ingredientes: \n");
                                     for (int index = 0; index < ingredientes.size(); index++) {
                                         System.out.println(index + "." + ingredientes.get(index).getNome());
                                     }
 
-                                    System.out.println("Digite o index do ingrediente para adicionar: ");
+                                    System.out.println("\nDigite o índice dos ingredientes que deseja adicionar: ");
                                     op = scanner.nextInt();
                                     scanner.nextLine();
 
                                     ingredientes.get(op).mostrarIngrediente();
 
-                                    System.out.println("Confirmar ingrediente? s/n");
+                                    System.out.println("\nConfirmar ingrediente?");
                                     escolha = scanner.nextLine();
-                                } while (!escolha.equals("s"));
+                                    escolha = escolha.toUpperCase();
+                                } while (!escolha.equals("SIM"));
 
                                 ((Prato) itens.get(itens.size() - 1)).adicionarIngredientes(ingredientes.get(op));
                                 sound.MusicConcluido();
 
-                                System.out.println("Quer adicionar outro ingrediente? s/n");
+                                System.out.println("\nQuer adicionar outro ingrediente?");
                                 escolha = scanner.nextLine();
-                            } while (!escolha.equals("n"));
+                                escolha = escolha.toUpperCase();
+                            } while (!escolha.equals("NÃO") && !escolha.equals("NAO"));
                         }
 
                         escreverNoArquivoItens(itens.get(itens.size() - 1)); // escreve o item no arquivo já com ingredientes
@@ -131,22 +146,23 @@ public class Restaurante implements EnumsGerais {
 
                         do {
                             do {
-                                System.out.println("\nLista itens: ");
+                                System.out.println("\nLista itens: \n");
                                 for (int index = 0; index < itens.size(); index++) {
                                     System.out.println(index + "." + itens.get(index).getNome());
                                 }
 
-                                System.out.println("Digite a opcao do item que deseja adicionar: ");
+                                System.out.println("\nDigite o índice dos itens que deseja adicionar: ");
                                 op = scanner.nextInt();
                                 scanner.nextLine();
 
                                 itens.get(op).mostrarItem();
 
-                                System.out.println("Confirmar item? s/n");
+                                System.out.println("\nConfirmar item?");
                                 escolha = scanner.nextLine();
-                            } while (!escolha.equals("s"));
+                                escolha = escolha.toUpperCase();
+                            } while (!escolha.equals("SIM"));
 
-                            System.out.println("Digite a quantidade deseja adicionar: ");
+                            System.out.println("\nDigite a que quantidade deseja pedir: ");
                             int qtd = scanner.nextInt();
                             scanner.nextLine();
 
@@ -165,13 +181,14 @@ public class Restaurante implements EnumsGerais {
                             ItemPedido item = new ItemPedido(itens.get(op), qtd);
                             pedidos.get(pedidos.size() - 1).adicionarItem(item);
 
-                            System.out.println("Deseja adicionar outro item? s/n");
+                            System.out.println("\nDeseja adicionar outro item?");
                             escolha = scanner.nextLine();
-                        } while (escolha.equals("s"));
+                            escolha = escolha.toUpperCase();
+                        } while (escolha.equals("SIM"));
 
                         pedidos.get(pedidos.size() - 1).calcularValorTotal();
 
-                        System.out.println("Digite a forma de pagamento: ");
+                        System.out.println("\nDigite a forma de pagamento: ");
                         String formaPag = scanner.nextLine();
                         pedidos.get(pedidos.size() - 1).setFormaPag(formaPag);
                         pedidos.get(pedidos.size() - 1).confirmarPagamento();
@@ -197,7 +214,7 @@ public class Restaurante implements EnumsGerais {
                     mostrarPedidos(pedidos);
                 }
                 case 8 -> { // mostrar ingredientes
-                    System.out.println("Ingredientes cadastrados: \n");
+                    System.out.println("\nIngredientes cadastrados: \n");
                     ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
                     for (Ingredientes ingrediente : ingredientes) {
                         ingrediente.mostrarIngrediente();
@@ -206,40 +223,40 @@ public class Restaurante implements EnumsGerais {
                 }
                 case 9 -> fecharMes(funcionarios, nroPedidos);
                 case 10 -> {
-                    System.out.println("\nVocê quer excluir: " +
-                            "\n 1. Funcionários" +
-                            "\n 2. Itens" +
-                            "\n 3. Ingredientes");
+                    System.out.println(ANSI_RED + "\nVocê quer excluir: " +
+                            "\n1. Funcionários?" +
+                            "\n2. Itens?" +
+                            "\n3. Ingredientes?" + ANSI_RESET);
 
                     int exc = scanner.nextInt();
 
                     switch (exc) {
                         case 1 -> {
-                            System.out.println("Digite o nome do funcionário: ");
+                            System.out.print("\nDigite o nome do funcionário: ");
                             scanner.nextLine();
                             String nome = scanner.next();
                             excluirObjetoFuncionario(nome);
                             funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
                         }
                         case 2 -> {
-                            System.out.println("Digite o nome do item: ");
+                            System.out.print("\nDigite o nome do item: ");
                             scanner.nextLine();
                             String nome = scanner.next();
                             excluirObjetoItens(nome);
                             itens = (ArrayList<Itens>) lerArquivoItens();
                         }
                         case 3 -> {
-                            System.out.println("Digite o nome do ingrediente: ");
+                            System.out.print("\nDigite o nome do ingrediente: ");
                             scanner.nextLine();
                             String nome = scanner.next();
                             excluirObjetoIngredientes(nome);
                             ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
                         }
-                        default -> System.out.println("\nOpção inválida!");
+                        default -> System.out.println(ANSI_RED + "\nOpção inválida!" + ANSI_RESET);
                     }
                 }
-                case 0 -> System.out.println("Saindo do programa. Até mais!");
-                default -> System.out.println("Opção inválida. Tente novamente.");
+                case 0 -> System.out.println(ANSI_YELLOW + "\nAdoraríamos te receber no restaurante novamente. Até mais!" + ANSI_RESET);
+                default -> System.out.println(ANSI_RED + "\nOpção inválida. Tente novamente." + ANSI_RESET);
             }
         } while (opcao != 0);
         
@@ -265,7 +282,7 @@ public class Restaurante implements EnumsGerais {
     }
 
     public static Funcionario cadastrarFuncionario() {
-        System.out.println("CADASTRAMENTO DE FUNCIONÁRIOS\n");
+        System.out.println(ANSI_BLUE + "\nCADASTRAMENTO DE FUNCIONÁRIOS\n" + ANSI_RESET);
 
         sleep.Sleeping(1000);
 
@@ -308,6 +325,7 @@ public class Restaurante implements EnumsGerais {
         do {
             System.out.print("\nDigite o estado civil do funcionário: ");
             ec = scanner.nextLine();
+            ec = ec.toUpperCase();
 
             ecConvertido = converterEstadoCivil(ec);
 
@@ -315,7 +333,6 @@ public class Restaurante implements EnumsGerais {
                 System.out.println("Estado Civil inválido!");
             }
         } while (ecConvertido == null);
-        ec = ec.toUpperCase();
 
         System.out.print("\nDigite o número da carteira de trabalho do funcionário: ");
         int nroC = scanner.nextInt();
@@ -329,16 +346,16 @@ public class Restaurante implements EnumsGerais {
             String dia;
             EnumsGerais.DiaSemana diaConvertido;
             do {
-                System.out.println("\nDigite o dia da semana de folga do garçom: ");
+                System.out.print("\nDigite o dia da semana de folga do garçom: ");
                 dia = scanner.nextLine();
+                dia = dia.toUpperCase();
 
                 diaConvertido = converterFolga(dia);
 
                 if(diaConvertido == null){
-                    System.out.println("Dia da semana inválido!");
+                    System.out.println("\nDia da semana inválido!");
                 }
             } while (diaConvertido == null);
-            dia = dia.toUpperCase();
 
             return new Garcom(nome, end, ecConvertido, nroC, cpf, rg, sal, diaConvertido);
         }
@@ -395,7 +412,7 @@ public class Restaurante implements EnumsGerais {
     }
 
     public static Ingredientes cadastrarIngrediente(){
-        System.out.println("CADASTRAMENTO DE INGREDIENTES\n");
+        System.out.println(ANSI_BLUE + "\nCADASTRAMENTO DE INGREDIENTES\n" + ANSI_RESET);
 
         sleep.Sleeping(1000);
 
@@ -403,17 +420,17 @@ public class Restaurante implements EnumsGerais {
 
         sleep.Sleeping(1000);
 
-        System.out.print("\nDigite o nome do ingrediente: ");
+        System.out.print("Digite o nome do ingrediente: ");
         String nome = scanner.nextLine();
         
-        System.out.print("\nDigite a quantidade do ingrediente (Kg, Litro, Unidade, etc.): ");
+        System.out.print("\nDigite a quantidade do ingrediente " + ANSI_YELLOW + "(Kg, Litro, Unidade, etc.): " + ANSI_RESET);
         String qtd = scanner.nextLine();
 
         return new Ingredientes(nome, qtd);
     }
 
     public static Itens cadastrarItens(ArrayList<Itens> itens) throws ErroCodigoException{
-        System.out.println("\nCADASTRAMENTO DE ITENS\n");
+        System.out.println(ANSI_BLUE + "\nCADASTRAMENTO DE ITENS\n" + ANSI_RESET);
         Itens item;
 
         sleep.Sleeping(1000);
@@ -440,43 +457,45 @@ public class Restaurante implements EnumsGerais {
         double precoUnitario = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.print("\nn1" +
-                "Preço de custo: ");
+        System.out.print("\nPreço de custo: ");
         double precoCusto = scanner.nextDouble();
         scanner.nextLine();
 
         if (x.equals("PRATO PRINCIPAL") || x.equals("SOBREMESA")) {
-            System.out.print("Descrição: ");
+            System.out.print("\nDescrição: ");
             String descricao = scanner.nextLine();
 
-            System.out.print("Tempo de preparo: ");
+            System.out.print("\nTempo de preparo " + ANSI_YELLOW + "(Em minutos): " + ANSI_RESET);
             double tempoPreparo = scanner.nextDouble();
             scanner.nextLine();
 
             if (x.equals("PRATO PRINCIPAL")) {
                 item = new PratoPrincipal(nome, descricao, tempoPreparo, precoUnitario, precoCusto, itens);
-            } else{
-                System.out.print("Número de calorias: ");
+            }
+            else{
+                System.out.print("\nNúmero de calorias: ");
                 double nroCal = scanner.nextDouble();
                 scanner.nextLine();
 
                 item = new Sobremesa(nome, descricao, tempoPreparo, precoUnitario, precoCusto, nroCal, itens);
             }
-        } else {
+        }
+        else {
             String tipoEmbalagem;
             EnumsGerais.EmbalagemBebidas embalagemConvertida;
             do {
                 System.out.println("\nDigite o tipo da sua embalagem: ");
                 tipoEmbalagem = scanner.nextLine();
+                tipoEmbalagem = tipoEmbalagem.toUpperCase();
 
                 embalagemConvertida = converterTipoEmbalagem(tipoEmbalagem);
 
                 if(embalagemConvertida == null){
-                    System.out.println("Tipo de embalagem inválida!");
+                    System.out.println(ANSI_RED + "\nTipo de embalagem inválida!" + ANSI_RESET);
                 }
             } while (embalagemConvertida == null);
 
-            System.out.print("Tamanho da embalagem (em mL): ");
+            System.out.print("Tamanho da embalagem " + ANSI_YELLOW + "(em mL): " + ANSI_RESET);
             double tamanhoEmbalagem = scanner.nextDouble();
 
             item = new Bebida(nome, precoUnitario, precoCusto, itens, embalagemConvertida, tamanhoEmbalagem);
@@ -504,13 +523,13 @@ public class Restaurante implements EnumsGerais {
     }
 
     public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios) throws PagamentoException{
-        System.out.println("CADASTRAMENTO DE PEDIDOS\n");
+        System.out.println(ANSI_BLUE + "\nFAZENDO PEDIDO\n" + ANSI_RESET);
         Garcom garcom;
         Cozinheiro cozinheiro;
 
         sleep.Sleeping(1000);
 
-        System.out.println("Iniciando cadastro...\n");
+        System.out.println("Chamando garçom...\n");
 
         sleep.Sleeping(1000);
 
@@ -519,22 +538,22 @@ public class Restaurante implements EnumsGerais {
         do 
         {
             do {
-                System.out.println("\nLista de garçons: ");
+                System.out.println("Lista de garçons: \n");
                 for (int index = 0; index < funcionarios.size(); index++) {
                     if(funcionarios.get(index) instanceof Garcom){
                         System.out.println(index + "." + funcionarios.get(index).getNome());
                     }
                 }
-                System.out.println("Digite o codigo do garçom: ");
+                System.out.println("\nDigite o código do garçom: ");
                 op = scanner.nextInt();
                 scanner.nextLine();
 
                 funcionarios.get(op).mostrarFuncionario();
 
-                System.out.println("Confirmar o garçom? s/n");
+                System.out.println("\nConfirmar o garçom?");
                 c = scanner.nextLine();
-
-            } while (!c.equals("s"));
+                c = c.toUpperCase();
+            } while (!c.equals("SIM"));
 
             if (funcionarios.get(op) instanceof Garcom) {
                 garcom = (Garcom) funcionarios.get(op);
@@ -548,21 +567,22 @@ public class Restaurante implements EnumsGerais {
         do 
         {
             do {
-                System.out.println("\nLista de cozinheiros: ");
+                System.out.println("\nLista de cozinheiros: \n");
                 for (int index = 0; index < funcionarios.size(); index++) {
                     if(funcionarios.get(index) instanceof Cozinheiro){
                         System.out.println(index + "." + funcionarios.get(index).getNome());
                     }
                 }
-                System.out.println("Digite o codigo do cozinheiro: ");
+                System.out.println("\nDigite o código do cozinheiro: ");
                 op = scanner.nextInt();
                 scanner.nextLine();
 
                 funcionarios.get(op).mostrarFuncionario();
 
-                System.out.println("Confirmar o cozinheiro? s/n");
+                System.out.println("\nConfirmar o cozinheiro?");
                 c = scanner.nextLine();
-            } while (!c.equals("s"));
+                c = c.toUpperCase();
+            } while (!c.equals("SIM"));
 
             if (funcionarios.get(op) instanceof Cozinheiro) {
                 cozinheiro = (Cozinheiro) funcionarios.get(op);
@@ -583,9 +603,9 @@ public class Restaurante implements EnumsGerais {
 
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Cozinheiro) {
-                System.out.println("Salario de " + funcionario.getNome() + ": " + funcionario.calcularSalario());
+                System.out.println(ANSI_CYAN + "\nSalário do cozinheiro: " + funcionario.getNome() + " - R$ " + funcionario.calcularSalario() + ANSI_RESET);
             } else {
-                System.out.println("Salario de " + funcionario.getNome() + ": " + ((Garcom) funcionario).calcularSalario(nroPedidos));
+                System.out.println(ANSI_CYAN + "\nSalário do garçom: " + funcionario.getNome() + " R$ " + ((Garcom) funcionario).calcularSalario(nroPedidos) + ANSI_RESET);
             }
         }
     }
@@ -594,60 +614,63 @@ public class Restaurante implements EnumsGerais {
         String input;
         int op;
         do {
-            System.out.println("\nLista de itens: ");
+            System.out.println("\nLista de itens: \n");
             for (int index = 0; index < itens.size(); index++) {
                 System.out.println(index + "." + itens.get(index).getNome());
             }
 
-            System.out.println("Digite o index do item para mais informacoes: ");
+            System.out.println("\nDigite o índice do item que deseja obter mais informações: \n");
             op = scanner.nextInt();
             scanner.nextLine();
 
             itens.get(op).mostrarItem();
 
-            System.out.println("Deseja verificar outro item?");
+            System.out.println("\nDeseja verificar outro item?");
             input = scanner.nextLine();
-        } while (!input.equals("n"));
+            input = input.toUpperCase();
+        } while (!input.equals("NÃO") && !input.equals("NAO"));
     }
 
     public static void mostrarFuncionarios(ArrayList<Funcionario> funcionarios){
         String input;
         int op;
         do {
-            System.out.println("\nLista de funcionarios: ");
+            System.out.println("\nLista de funcionários: \n");
             for (int index = 0; index < funcionarios.size(); index++) {
                 System.out.println(index + "." + funcionarios.get(index).getNome());
             }
 
-            System.out.println("Digite o index do funcionario para mais informacoes: ");
+            System.out.println("\nDigite o índice do funcionário que deseja obter mais informações: ");
             op = scanner.nextInt();
             scanner.nextLine();
 
             funcionarios.get(op).mostrarFuncionario();
 
-            System.out.println("Deseja verificar outro funcionario?");
+            System.out.println("\nDeseja verificar outro funcionario?");
             input = scanner.nextLine();
-        } while (!input.equals("n"));
+            input = input.toUpperCase();
+        } while (!input.equals("NÃO") && !input.equals("NAO"));
     }
 
     public static void mostrarPedidos(ArrayList<Pedido> pedidos){
         String input;
         int op;
         do {
-            System.out.println("\nLista de pedidos: ");
+            System.out.println("\nLista de pedidos: \n");
             for (int index = 0; index < pedidos.size(); index++) {
                 System.out.println("Pedido " + index);
             }
 
-            System.out.println("Digite o numero do pedido para mais informações: ");
+            System.out.println("\nDigite o número do pedido para mais informações: ");
             op = scanner.nextInt();
             scanner.nextLine();
 
             pedidos.get(op).mostrarPedido();
 
-            System.out.println("Deseja verificar outro pedido?");
+            System.out.println("\nDeseja verificar outro pedido?");
             input = scanner.nextLine();
-        } while (!input.equals("n"));
+            input = input.toUpperCase();
+        } while (!input.equals("NÃO") && !input.equals("NAO"));
     }
 
     public static void demitirFuncionario(ArrayList<Funcionario> funcionarios, int pedidosTotais){
@@ -669,7 +692,7 @@ public class Restaurante implements EnumsGerais {
             List<Itens> objetos = lerArquivoItens();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("Itens.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -679,10 +702,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O item foi cadastrado no sistema.");
+            System.out.println(ANSI_GREEN + "\nO item foi cadastrado no sistema!" + ANSI_RESET);
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao cadastrar: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao cadastrar: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -690,7 +713,7 @@ public class Restaurante implements EnumsGerais {
         List<Itens> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("itens.bin");
+            FileInputStream fileIn = new FileInputStream("Itens.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Itens objetoLido;
@@ -721,12 +744,12 @@ public class Restaurante implements EnumsGerais {
             Itens objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
                 iterator.remove();
-                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+                System.out.println(ANSI_GREEN + "\nItem '" + nome + "' foi excluído com sucesso!" + ANSI_RESET);
             }
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            FileOutputStream fileOut = new FileOutputStream("Itens.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever os objetos atualizados no arquivo
@@ -738,7 +761,7 @@ public class Restaurante implements EnumsGerais {
             objectOut.close();
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao escrever no arquivo: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -749,7 +772,7 @@ public class Restaurante implements EnumsGerais {
             List<Funcionario> objetos = lerArquivoFuncionario();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("funcionario.bin");
+            FileOutputStream fileOut = new FileOutputStream("Funcionario.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -759,10 +782,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O funcionário foi cadastrado no sistema.");
+            System.out.println(ANSI_GREEN + "\nO funcionário foi cadastrado no sistema!" + ANSI_RESET);
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao cadastrar: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao cadastrar: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -770,7 +793,7 @@ public class Restaurante implements EnumsGerais {
         List<Funcionario> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("funcionario.bin");
+            FileInputStream fileIn = new FileInputStream("Funcionario.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Funcionario objetoLido;
@@ -801,12 +824,12 @@ public class Restaurante implements EnumsGerais {
             Funcionario objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
                 iterator.remove();
-                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+                System.out.println(ANSI_GREEN + "\nFuncionário '" + nome + "' foi excluído com sucesso!");
             }
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("funcionario.bin");
+            FileOutputStream fileOut = new FileOutputStream("Funcionario.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever os objetos atualizados no arquivo
@@ -818,7 +841,7 @@ public class Restaurante implements EnumsGerais {
             objectOut.close();
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao escrever no arquivo: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -829,7 +852,7 @@ public class Restaurante implements EnumsGerais {
             List<Ingredientes> objetos = lerArquivoIngredientes();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("ingredientes.bin");
+            FileOutputStream fileOut = new FileOutputStream("Ingredientes.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -839,10 +862,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O ingrediente foi armazenado no sistema.");
+            System.out.println(ANSI_GREEN + "\nO ingrediente foi armazenado no sistema!" + ANSI_RESET);
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao armazenar: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao armazenar: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -850,7 +873,7 @@ public class Restaurante implements EnumsGerais {
         List<Ingredientes> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("ingredientes.bin");
+            FileInputStream fileIn = new FileInputStream("Ingredientes.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Ingredientes objetoLido;
@@ -881,12 +904,12 @@ public class Restaurante implements EnumsGerais {
             Ingredientes objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
                 iterator.remove();
-                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+                System.out.println(ANSI_GREEN + "\nO ingrediente '" + nome + "' foi excluído com sucesso!" + ANSI_RESET);
             }
         }
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("ingredientes.bin");
+            FileOutputStream fileOut = new FileOutputStream("Ingredientes.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever os objetos atualizados no arquivo
@@ -898,7 +921,7 @@ public class Restaurante implements EnumsGerais {
             objectOut.close();
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao escrever no arquivo: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -909,7 +932,7 @@ public class Restaurante implements EnumsGerais {
             List<Pedido> objetos = lerArquivoPedido();
             objetos.add(objetoA);
 
-            FileOutputStream fileOut = new FileOutputStream("pedido.bin");
+            FileOutputStream fileOut = new FileOutputStream("Pedido.bin");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 
             // Escrever todos os objetos no arquivo
@@ -919,10 +942,10 @@ public class Restaurante implements EnumsGerais {
 
             // Fechar o ObjectOutputStream após a escrita
             objectOut.close();
-            System.out.println("O pedido foi armazenado no sistema.");
+            System.out.println(ANSI_GREEN + "\nO pedido foi armazenado no sistema!" + ANSI_RESET);
 
         } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao armazenar o pedido no sistema: " + e.getMessage());
+            System.out.println(ANSI_RED + "\nOcorreu um erro ao armazenar o pedido no sistema: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -930,7 +953,7 @@ public class Restaurante implements EnumsGerais {
         List<Pedido> objetos = new ArrayList<>();
 
         try {
-            FileInputStream fileIn = new FileInputStream("pedido.bin");
+            FileInputStream fileIn = new FileInputStream("Pedido.bin");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             Pedido objetoLido;

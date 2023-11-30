@@ -82,6 +82,7 @@ public abstract class Itens implements Serializable {
     }
 
     public void mostrarItem(){
+        System.out.println("\nInformações do item: \n");
         System.out.println("Nome: " + nome);
         System.out.println("Preço unitário: " + precoUnitario);
         System.out.println("Preço de custo: " + precoCusto);

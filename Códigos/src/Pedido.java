@@ -27,16 +27,16 @@ public class Pedido implements Serializable {
     public void confirmarPagamento() throws PagamentoException {
         this.formaPag = formaPag.toUpperCase();
         if (formaPag.equals("DINHEIRO")) {
-            System.out.println("Pagamento confirmado!");
+            System.out.println("\nPagamento confirmado!");
             this.horaPagamento = LocalDateTime.now();
         } else if (formaPag.equals("CARTÃO") || formaPag.equals("CARTAO")) {
-            System.out.println("Pagamento confirmado!");
+            System.out.println("\nPagamento confirmado!");
             this.horaPagamento = LocalDateTime.now();
         } else if (formaPag.equals("PIX")) {
-            System.out.println("Pagamento confirmado!");
+            System.out.println("\nPagamento confirmado!");
             this.horaPagamento = LocalDateTime.now();
         } else {
-            throw new PagamentoException("Forma de pagamento inválida!\nAceitamos apenas dinheiro, cartão ou pix.");
+            throw new PagamentoException("\nForma de pagamento inválida! Aceitamos apenas dinheiro, cartão ou pix.");
         }
     }
 
@@ -87,6 +87,7 @@ public class Pedido implements Serializable {
     }
 
     public void mostrarPedido() {
+        System.out.println("\nInformações do pedido: \n");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy\tHH:mm:ss");
         System.out.println(dataPedido.format(formatter));
         System.out.println("Garçom: " + garcom.getNome());
@@ -96,7 +97,7 @@ public class Pedido implements Serializable {
             item.mostrarItem();
         }
         System.out.println("Forma de pagamento: " + formaPag);
-        System.out.println("Pagamento confirmado: " + horaPagamento.format(formatter));
+        System.out.println("Pagamento confirmado: " + horaPagamento.format(formatter) + "\n");
     }
      
 }
