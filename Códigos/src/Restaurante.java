@@ -18,8 +18,8 @@ public class Restaurante implements EnumsGerais{
 
         try {
             // Bebida instances
-            itens.add(new Bebida("Nome1", 10.0, 5.0, itens, "TipoEmbalagem1", "TamanhoEmbalagem1"));
-            itens.add(new Bebida("Nome2", 15.0, 8.0, itens, "TipoEmbalagem2", "TamanhoEmbalagem2"));
+            itens.add(new Bebida("Nome1", 10.0, 5.0, itens, EmbalagemBebidas.OUTROS, 250));
+            itens.add(new Bebida("Nome2", 15.0, 8.0, itens, EmbalagemBebidas.OUTROS, 250));
 
             // Sobremesa instances
             itens.add(new Sobremesa("Nome1", "Descricao1", 20.0, 12.0, 7.0,  13000.0,itens));
@@ -57,7 +57,7 @@ public class Restaurante implements EnumsGerais{
             System.out.println("5. Checar Item");
             System.out.println("6. Checar Funcionário");
             System.out.println("7. Checar Pedido");
-            System.out.println("8. Fechar mes");
+            System.out.println("8. Fechar mês");
             System.out.println("0. Sair");
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
@@ -413,16 +413,44 @@ public class Restaurante implements EnumsGerais{
                 item = new Sobremesa(nome, descricao, tempoPreparo, precoUnitario, precoCusto, nroCal, itens);
             }
         } else {
-            System.out.print("Tipo de embalagem: ");
-            String tipoEmbalagem = scanner.nextLine();
+            String tipoEmbalagem;
+            EnumsGerais.EmbalagemBebidas embalagemConvertida;
+            do {
+                System.out.println("\nDigite o tipo da sua embalagem: ");
+                tipoEmbalagem = scanner.nextLine();
 
-            System.out.print("Tamanho da embalagem: ");
-            String tamanhoEmbalagem = scanner.nextLine();
+                embalagemConvertida = converterTipoEmbalagem(tipoEmbalagem);
 
-            item = new Bebida(nome, precoUnitario, precoCusto, itens, tipoEmbalagem, tamanhoEmbalagem);
+                if(embalagemConvertida == null){
+                    System.out.println("Tipo de embalagem inválida!");
+                }
+            } while (embalagemConvertida == null);
+
+            System.out.print("Tamanho da embalagem (em mL): ");
+            double tamanhoEmbalagem = scanner.nextDouble();
+
+            item = new Bebida(nome, precoUnitario, precoCusto, itens, embalagemConvertida, tamanhoEmbalagem);
         }
 
         return item;
+    }
+
+    public static EnumsGerais.EmbalagemBebidas converterTipoEmbalagem(String tipoEmbalagem){
+        if(Objects.equals(tipoEmbalagem, "PLÁSTICO") || Objects.equals(tipoEmbalagem, "PLASTICO")){
+            return EmbalagemBebidas.PLASTICO;
+        }
+        if(Objects.equals(tipoEmbalagem, "LATA")){
+            return EmbalagemBebidas.LATA;
+        }
+        if(Objects.equals(tipoEmbalagem, "VIDRO")){
+            return EmbalagemBebidas.VIDRO;
+        }
+        if(Objects.equals(tipoEmbalagem, "OUTROS")){
+            return EmbalagemBebidas.OUTROS;
+        }
+        else{
+            return null;
+        }
     }
 
     public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios){
