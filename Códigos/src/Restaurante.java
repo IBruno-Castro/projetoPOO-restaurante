@@ -2,9 +2,17 @@ import java.io.*;
 import java.util.*;
 
 public class Restaurante implements EnumsGerais {
-    static Scanner scanner = new Scanner(System.in);
-    static SleepMetod sleep = new SleepMetod();
-    static SoundTrack sound = new SoundTrack();
+    public static Scanner scanner = new Scanner(System.in);
+    public static SleepMetod sleep = new SleepMetod();
+    public static SoundTrack sound = new SoundTrack();
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\033[0;30m";   // BLACK
+    public static final String ANSI_RED = "\033[0;31m";     // RED
+    public static final String ANSI_GREEN = "\033[0;32m";   // GREEN
+    public static final String ANSI_YELLOW = "\033[0;33m";  // YELLOW
+    public static final String ANSI_BLUE = "\033[0;34m";    // BLUE
+    public static final String ANSI_PURPLE = "\033[0;35m";  // PURPLE
+    public static final String ANSI_CYAN = "\033[0;36m";    // CYAN
 
     public static void main(String[] args) {
         sound.MusicFundo();
@@ -18,8 +26,7 @@ public class Restaurante implements EnumsGerais {
         int opcao;
 
         do {
-            System.out.println("BEM-VINDO AO RESTAURANTE\n");
-            System.out.println("============== Menu ==============");
+            System.out.println("============== Menu ==============" + ANSI_RESET);
             System.out.println("1. Cadastrar Funcionário");
             System.out.println("2. Cadastrar Ingrediente");
             System.out.println("3. Cadastrar Item");
@@ -399,14 +406,14 @@ public class Restaurante implements EnumsGerais {
         System.out.print("\nDigite o nome do ingrediente: ");
         String nome = scanner.nextLine();
         
-        System.out.print("\nDigite a quantidade do ingrediente: (Ex: 1kg, 1L, 1 unidade)");
+        System.out.print("\nDigite a quantidade do ingrediente (Kg, Litro, Unidade, etc.): ");
         String qtd = scanner.nextLine();
 
         return new Ingredientes(nome, qtd);
     }
 
     public static Itens cadastrarItens(ArrayList<Itens> itens) throws ErroCodigoException{
-        System.out.println("CADASTRAMENTO DE ITENS\n");
+        System.out.println("\nCADASTRAMENTO DE ITENS\n");
         Itens item;
 
         sleep.Sleeping(1000);
@@ -426,14 +433,15 @@ public class Restaurante implements EnumsGerais {
             }
         } while(!x.equals("BEBIDA") && !x.equals("PRATO PRINCIPAL") && !x.equals("SOBREMESA"));
 
-        System.out.print("Nome do item: ");
+        System.out.print("\nNome do item: ");
         String nome = scanner.nextLine();
 
-        System.out.print("Preço unitário: ");
+        System.out.print("\nPreço unitário: ");
         double precoUnitario = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.print("Preço de custo: ");
+        System.out.print("\nn1" +
+                "Preço de custo: ");
         double precoCusto = scanner.nextDouble();
         scanner.nextLine();
 
