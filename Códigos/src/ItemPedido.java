@@ -1,4 +1,6 @@
-public class ItemPedido{
+import java.io.Serializable;
+
+public class ItemPedido implements Serializable{
     private Itens item;
     private int qtd;
 
