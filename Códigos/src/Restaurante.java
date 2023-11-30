@@ -577,6 +577,7 @@ public class Restaurante implements EnumsGerais {
             if (funcionarios.get(op) instanceof Garcom) {
                 garcom = (Garcom) funcionarios.get(op);
                 garcom.registrarPedido();
+                atualizarGarcom(funcionarios, garcom);
             } else {
                 garcom = null;
             }
@@ -623,14 +624,13 @@ public class Restaurante implements EnumsGerais {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Cozinheiro) {
                 System.out.println(ANSI_CYAN + "\nSalário do cozinheiro: " + funcionario.getNome() + " - R$ " + funcionario.calcularSalario() + ANSI_RESET);
-                
-                //atualizarCozinheiro(funcionarios, (Cozinheiro) funcionario);
+                funcionario.zerarPedidos();
+                atualizarCozinheiro(funcionarios, (Cozinheiro) funcionario);
             } else {
                 System.out.println(ANSI_CYAN + "\nSalário do garçom: " + funcionario.getNome() + " R$ " + ((Garcom) funcionario).calcularSalario(nroPedidos) + ANSI_RESET);
-                
-                //atualizarGarcom(funcionarios, (Garcom) funcionario);
+                funcionario.zerarPedidos();
+                atualizarGarcom(funcionarios, (Garcom) funcionario);
             }
-            funcionario.zerarPedidos();
         }
     }
 
