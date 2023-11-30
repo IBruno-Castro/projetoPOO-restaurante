@@ -87,6 +87,10 @@ public class Garcom extends Funcionario {
         return nroPedidosAtendidos;
     }
 
+    public void zerarPedidos(){
+        nroPedidosAtendidos = 0;
+    }
+
     public void verificarPerformance(int nroPedidosTotais){
         if(this.nroPedidosAtendidos < (nroPedidosTotais * 0.05)){
             advertencias++;

@@ -43,6 +43,8 @@ public abstract class Funcionario implements EnumsGerais, Serializable {
 
     public abstract double calcularSalario();
 
+    public abstract void zerarPedidos();
+
     public String getCpf() {
         return cpf;
     }

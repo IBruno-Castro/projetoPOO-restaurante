@@ -281,6 +281,25 @@ public class Restaurante implements EnumsGerais {
         return funcionarios;
     }
 
+    private static ArrayList<Funcionario> atualizarGarcom(ArrayList<Funcionario> funcionarios, Garcom garcom) {
+        int j = 0;
+
+        for (int i = 0; i < funcionarios.size(); i++) {
+            Funcionario func = funcionarios.get(i);
+            if (func instanceof Garcom) {
+                if (garcom.getNome().equals(func.getNome())) {
+                    j = i;
+                    break;
+                }
+            }
+        }
+
+        excluirObjetoFuncionario(garcom.getNome());
+        escreverNoArquivoFuncionarios(funcionarios.get(j));
+        funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
+        return funcionarios;
+    }
+
     public static Funcionario cadastrarFuncionario() {
         System.out.println(ANSI_BLUE + "\nCADASTRAMENTO DE FUNCIONÁRIOS\n" + ANSI_RESET);
 
@@ -604,9 +623,14 @@ public class Restaurante implements EnumsGerais {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Cozinheiro) {
                 System.out.println(ANSI_CYAN + "\nSalário do cozinheiro: " + funcionario.getNome() + " - R$ " + funcionario.calcularSalario() + ANSI_RESET);
+                funcionario.zerarPedidos();
+                atualizarCozinheiro(funcionarios, (Cozinheiro) funcionario);
             } else {
                 System.out.println(ANSI_CYAN + "\nSalário do garçom: " + funcionario.getNome() + " R$ " + ((Garcom) funcionario).calcularSalario(nroPedidos) + ANSI_RESET);
+                funcionario.zerarPedidos();
+                atualizarGarcom(funcionarios, (Garcom) funcionario);
             }
+            funcionario.zerarPedidos();
         }
     }
 

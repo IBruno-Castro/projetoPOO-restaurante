@@ -30,6 +30,11 @@ public class Cozinheiro extends Funcionario{
         qtdPrincipal += n;
     }
 
+    public void zerarPedidos(){
+        qtdPrincipal = 0;
+        qtdSobremesa = 0;
+    }
+
     public void addPrato(Prato prato){
         listaPratos.add(prato);
         System.out.println(prato.getNome() + " foi adicionado a lista de pratos do cozinheiro!");
