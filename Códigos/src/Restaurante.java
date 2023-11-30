@@ -29,6 +29,7 @@ public class Restaurante implements EnumsGerais {
             System.out.println("7. Checar Pedido");
             System.out.println("8. Checar Ingredientes");
             System.out.println("9. Fechar mês");
+            System.out.println("10. Excluir do sistema");
             System.out.println("0. Sair");
             System.out.println("==================================");
             System.out.print("Escolha uma opção: ");
@@ -195,6 +196,36 @@ public class Restaurante implements EnumsGerais {
                     }
                 }
                 case 9 -> fecharMes(funcionarios, nroPedidos);
+                case 10 -> {
+                    System.out.println("\nVocê quer excluir: " +
+                            "\n 1. Funcionários" +
+                            "\n 2. Itens" +
+                            "\n 3. Ingredientes");
+
+                    int exc = scanner.nextInt();
+
+                    switch (exc) {
+                        case 1 -> {
+                            System.out.println("Digite o nome do funcionário: ");
+                            String nome = scanner.nextLine();
+                            excluirObjetoFuncionario(nome);
+                            funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
+                        }
+                        case 2 -> {
+                            System.out.println("Digite o nome do item: ");
+                            String nome = scanner.nextLine();
+                            excluirObjetoItens(nome);
+                            itens = (ArrayList<Itens>) lerArquivoItens();
+                        }
+                        case 3 -> {
+                            System.out.println("Digite o nome do ingrediente: ");
+                            String nome = scanner.nextLine();
+                            excluirObjetoIngredientes(nome);
+                            ingredientes = (ArrayList<Ingredientes>) lerArquivoIngredientes();
+                        }
+                        default -> System.out.println("\nOpção inválida!");
+                    }
+                }
                 case 0 -> System.out.println("Saindo do programa. Até mais!");
                 default -> System.out.println("Opção inválida. Tente novamente.");
             }
