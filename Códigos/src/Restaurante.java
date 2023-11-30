@@ -440,7 +440,7 @@ public class Restaurante implements EnumsGerais {
         }
     }
 
-    public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios){
+    public static Pedido cadastrarPedido(ArrayList<Funcionario> funcionarios) throws PagamentoException{
         System.out.println("CADASTRAMENTO DE PEDIDOS\n");
         Garcom garcom;
         Cozinheiro cozinheiro;
