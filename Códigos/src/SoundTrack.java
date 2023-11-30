@@ -11,8 +11,6 @@ public class SoundTrack {
             clip.open(audioInputStream);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY); //Para repetir o som até o fim da execução. 0 para repetir uma só vez
-            // clip.close(); fecha o som
-            // clip.stop(); pausa a música
 
             //genérico, pois há diversos erros possíveis
         } catch (Exception ex) {
@@ -29,8 +27,6 @@ public class SoundTrack {
             clip.start();
 
             clip.loop(0); //Para repetir o som até o fim da execução. 0 para repetir uma só vez
-            // clip.close(); fecha o som
-            // clip.stop(); pausa a música
 
             //genérico, pois há diversos erros possíveis
         } catch (Exception ex) {

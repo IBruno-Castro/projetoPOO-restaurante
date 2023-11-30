@@ -1,6 +1,10 @@
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class Bebida extends Itens {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private EnumsGerais.EmbalagemBebidas tipoEmbalagem;
     private double tamanhoEmbalagem;
 

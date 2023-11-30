@@ -1,16 +1,18 @@
+import java.io.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
-public class Restaurante implements EnumsGerais{
+public class Restaurante implements EnumsGerais {
     static Scanner scanner = new Scanner(System.in);
     static SleepMetod sleep = new SleepMetod();
     static SoundTrack sound = new SoundTrack();
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        //sound.MusicFundo();
+
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
-        ArrayList<Itens> itens = new ArrayList<>();
+        ArrayList<Itens> itens = (ArrayList<Itens>) lerArquivoItens();
+        List<Itens> deusmeajude;
         ArrayList<Pedido> pedidos = new ArrayList<>();
         ArrayList<Ingredientes> ingredientes = new ArrayList<>();
 
@@ -69,6 +71,7 @@ public class Restaurante implements EnumsGerais{
             switch (opcao) {
                 case 1:
                     funcionarios.add(cadastrarFuncionario());
+                    sound.MusicConcluido();
                     if(funcionarios.get(funcionarios.size() - 1) instanceof Cozinheiro){
                         
                         System.out.println("Adicione pratos preparados pelo cozinheiro");
@@ -92,6 +95,7 @@ public class Restaurante implements EnumsGerais{
                             } while (!escolha.equals("s"));
 
                             ((Cozinheiro) funcionarios.get(funcionarios.size() - 1)).addPrato((Prato)itens.get(op));
+                            sound.MusicConcluido();
 
                             System.out.println("Quer adicionar outro prato? s/n");
                             escolha = scanner.nextLine();
@@ -101,12 +105,13 @@ public class Restaurante implements EnumsGerais{
                     break;
                 case 2:
                     ingredientes.add(cadastrarIngrediente());
+                    sound.MusicConcluido();
                     ingredientes.get(ingredientes.size() - 1).mostrarIngrediente();
                     break;
                 case 3:
                     try {
                         itens.add(cadastrarItens(itens, ingredientes));
-
+                        sound.MusicConcluido();
                         if(itens.get(itens.size() - 1) instanceof Prato){
                             do{
                                 do {
@@ -126,6 +131,7 @@ public class Restaurante implements EnumsGerais{
                                 } while (!escolha.equals("s"));
 
                                 ((Prato) itens.get(itens.size() - 1)).adicionarIngredientes(ingredientes.get(op));
+                                sound.MusicConcluido();
 
                                 System.out.println("Quer adicionar outro ingrediente? s/n");
                                 escolha = scanner.nextLine();
@@ -140,6 +146,7 @@ public class Restaurante implements EnumsGerais{
                 case 4:
                     try {
                         pedidos.add(cadastrarPedido(funcionarios));
+                        sound.MusicConcluido();
 
                         do
                         {
@@ -195,7 +202,12 @@ public class Restaurante implements EnumsGerais{
                     }
                     break;
                 case 5:
-                    mostrarItens(itens);
+                    //mostrarItens(itens);
+                    deusmeajude = lerArquivoItens();
+                    for (int i = 0; i < deusmeajude.size(); i++) {
+                        deusmeajude.get(i).mostrarItem();
+                    }
+                    break;
                 case 6:
                     mostrarFuncionarios(funcionarios);
                 case 7: 
@@ -429,6 +441,7 @@ public class Restaurante implements EnumsGerais{
             item = new Bebida(nome, precoUnitario, precoCusto, itens, embalagemConvertida, tamanhoEmbalagem);
         }
 
+        escreverNoArquivoItens(item);
         return item;
     }
 
@@ -602,10 +615,301 @@ public class Restaurante implements EnumsGerais{
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Garcom) {
                 ((Garcom)funcionario).verificarPerformance(pedidosTotais);
-                if (((Garcom)funcionario).verificarDemissao() == true) {
+                if (((Garcom)funcionario).verificarDemissao()) {
                     funcionarios.remove(funcionario);
                 }
             }
         }
+    }
+
+    // para itens
+
+    public static void escreverNoArquivoItens(Itens objetoA) {
+        try {
+            List<Itens> objetos = lerArquivoItens();
+            objetos.add(objetoA);
+
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever todos os objetos no arquivo
+            for (Itens objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    public static List<Itens> lerArquivoItens() {
+        List<Itens> objetos = new ArrayList<>();
+
+        try {
+            FileInputStream fileIn = new FileInputStream("itens.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Itens objetoLido;
+            while (true) {
+                try {
+                    objetoLido = (Itens) objectIn.readObject();
+                    objetos.add(objetoLido);
+                } catch (EOFException e) {
+                    // Fim do arquivo alcançado, não há mais objetos para ler
+                    break;
+                }
+            }
+
+            objectIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            // Ignorar se o arquivo não existir ou estiver vazio
+        }
+
+        return objetos;
+    }
+
+    public static void excluirObjetoItens(String nome) {
+        List<Itens> objetos = lerArquivoItens();
+
+        Iterator<Itens> iterator = objetos.iterator();
+        while (iterator.hasNext()) {
+            Itens objeto = iterator.next();
+            if (objeto.getNome().equals(nome)) {
+                iterator.remove();
+                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+            }
+        }
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever os objetos atualizados no arquivo
+            for (Itens objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    // para funcionários
+
+    public static void escreverNoArquivoFuncionarios(Funcionario objetoA) {
+        try {
+            List<Funcionario> objetos = lerArquivoFuncionario();
+            objetos.add(objetoA);
+
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever todos os objetos no arquivo
+            for (Funcionario objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    public static List<Funcionario> lerArquivoFuncionario() {
+        List<Funcionario> objetos = new ArrayList<>();
+
+        try {
+            FileInputStream fileIn = new FileInputStream("itens.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Funcionario objetoLido;
+            while (true) {
+                try {
+                    objetoLido = (Funcionario) objectIn.readObject();
+                    objetos.add(objetoLido);
+                } catch (EOFException e) {
+                    // Fim do arquivo alcançado, não há mais objetos para ler
+                    break;
+                }
+            }
+
+            objectIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            // Ignorar se o arquivo não existir ou estiver vazio
+        }
+
+        return objetos;
+    }
+
+    public static void excluirObjetoFuncionario(String nome) {
+        List<Funcionario> objetos = lerArquivoFuncionario();
+
+        Iterator<Funcionario> iterator = objetos.iterator();
+        while (iterator.hasNext()) {
+            Funcionario objeto = iterator.next();
+            if (objeto.getNome().equals(nome)) {
+                iterator.remove();
+                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+            }
+        }
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever os objetos atualizados no arquivo
+            for (Funcionario objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    // para ingredientes
+
+    public static void escreverNoArquivoIngredientes(Ingredientes objetoA) {
+        try {
+            List<Ingredientes> objetos = lerArquivoIngredientes();
+            objetos.add(objetoA);
+
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever todos os objetos no arquivo
+            for (Ingredientes objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    public static List<Ingredientes> lerArquivoIngredientes() {
+        List<Ingredientes> objetos = new ArrayList<>();
+
+        try {
+            FileInputStream fileIn = new FileInputStream("itens.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Ingredientes objetoLido;
+            while (true) {
+                try {
+                    objetoLido = (Ingredientes) objectIn.readObject();
+                    objetos.add(objetoLido);
+                } catch (EOFException e) {
+                    // Fim do arquivo alcançado, não há mais objetos para ler
+                    break;
+                }
+            }
+
+            objectIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            // Ignorar se o arquivo não existir ou estiver vazio
+        }
+
+        return objetos;
+    }
+
+    public static void excluirObjetoIngredientes(String nome) {
+        List<Ingredientes> objetos = lerArquivoIngredientes();
+
+        Iterator<Ingredientes> iterator = objetos.iterator();
+        while (iterator.hasNext()) {
+            Ingredientes objeto = iterator.next();
+            if (objeto.getNome().equals(nome)) {
+                iterator.remove();
+                System.out.println("Objeto com o nome '" + nome + "' excluído.");
+            }
+        }
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever os objetos atualizados no arquivo
+            for (Ingredientes objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+
+        } catch (IOException e) {
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    // para pedidos
+
+    public static void escreverNoArquivoPedido(Pedido objetoA) {
+        try {
+            List<Pedido> objetos = lerArquivoPedido();
+            objetos.add(objetoA);
+
+            FileOutputStream fileOut = new FileOutputStream("itens.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+
+            // Escrever todos os objetos no arquivo
+            for (Pedido objeto : objetos) {
+                objectOut.writeObject(objeto);
+            }
+
+            // Fechar o ObjectOutputStream após a escrita
+            objectOut.close();
+            System.out.println("O objeto foi escrito no arquivo 'itens.bin'.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Ocorreu um erro ao escrever no arquivo: " + e.getMessage());
+        }
+    }
+
+    public static List<Pedido> lerArquivoPedido() {
+        List<Pedido> objetos = new ArrayList<>();
+
+        try {
+            FileInputStream fileIn = new FileInputStream("itens.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            Pedido objetoLido;
+            while (true) {
+                try {
+                    objetoLido = (Pedido) objectIn.readObject();
+                    objetos.add(objetoLido);
+                } catch (EOFException e) {
+                    // Fim do arquivo alcançado, não há mais objetos para ler
+                    break;
+                }
+            }
+
+            objectIn.close();
+        } catch (IOException | ClassNotFoundException e) {
+            // Ignorar se o arquivo não existir ou estiver vazio
+        }
+
+        return objetos;
     }
 }

@@ -1,6 +1,10 @@
+import java.io.Serial;
 import java.util.ArrayList;
 
 public abstract class Prato extends Itens {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     protected ArrayList<Ingredientes> listaIngredientes = new ArrayList<>();
     protected String descricao;
     protected double tempoPreparo;
