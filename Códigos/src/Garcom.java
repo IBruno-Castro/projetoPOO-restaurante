@@ -1,6 +1,10 @@
+import java.io.Serial;
 import java.lang.IllegalArgumentException;
 
 public class Garcom extends Funcionario {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     private double salarioBase;
     private EnumsGerais.DiaSemana diaFolga;
     private int advertencias = 0;
