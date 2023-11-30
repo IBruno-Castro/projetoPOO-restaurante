@@ -1,7 +1,13 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Funcionario implements EnumsGerais{
+public abstract class Funcionario implements EnumsGerais, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     protected String nome;
     protected String cpf;
     protected String rg;
