@@ -623,12 +623,12 @@ public class Restaurante implements EnumsGerais {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Cozinheiro) {
                 System.out.println(ANSI_CYAN + "\nSalário do cozinheiro: " + funcionario.getNome() + " - R$ " + funcionario.calcularSalario() + ANSI_RESET);
-                funcionario.zerarPedidos();
-                atualizarCozinheiro(funcionarios, (Cozinheiro) funcionario);
+                
+                //atualizarCozinheiro(funcionarios, (Cozinheiro) funcionario);
             } else {
                 System.out.println(ANSI_CYAN + "\nSalário do garçom: " + funcionario.getNome() + " R$ " + ((Garcom) funcionario).calcularSalario(nroPedidos) + ANSI_RESET);
-                funcionario.zerarPedidos();
-                atualizarGarcom(funcionarios, (Garcom) funcionario);
+                
+                //atualizarGarcom(funcionarios, (Garcom) funcionario);
             }
             funcionario.zerarPedidos();
         }
