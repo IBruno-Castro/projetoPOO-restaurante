@@ -146,11 +146,13 @@ public class Restaurante implements EnumsGerais {
                             if (itens.get(op) instanceof PratoPrincipal) {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increasePrincipal(qtd);
+                                funcionarios = atualizarCozinheiro(funcionarios, cozinheiro);
                             }
 
                             if (itens.get(op) instanceof Sobremesa) {
                                 Cozinheiro cozinheiro = pedidos.get(pedidos.size() - 1).getCozinheiro();
                                 cozinheiro.increaseSobremesa(qtd);
+                                funcionarios = atualizarCozinheiro(funcionarios, cozinheiro);
                             }
 
                             ItemPedido item = new ItemPedido(itens.get(op), qtd);
@@ -231,6 +233,25 @@ public class Restaurante implements EnumsGerais {
             }
         } while (opcao != 0);
         
+    }
+
+    private static ArrayList<Funcionario> atualizarCozinheiro(ArrayList<Funcionario> funcionarios, Cozinheiro cozinheiro) {
+        int j = 0;
+
+        for (int i = 0; i < funcionarios.size(); i++) {
+            Funcionario func = funcionarios.get(i);
+            if (func instanceof Cozinheiro) {
+                if (cozinheiro.getNome().equals(func.getNome())) {
+                    j = i;
+                    break;
+                }
+            }
+        }
+
+        excluirObjetoFuncionario(cozinheiro.getNome());
+        escreverNoArquivoFuncionarios(funcionarios.get(j));
+        funcionarios = (ArrayList<Funcionario>) lerArquivoFuncionario();
+        return funcionarios;
     }
 
     public static Funcionario cadastrarFuncionario() {
