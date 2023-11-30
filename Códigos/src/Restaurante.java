@@ -8,11 +8,10 @@ public class Restaurante implements EnumsGerais {
     static SoundTrack sound = new SoundTrack();
 
     public static void main(String[] args) {
-        //sound.MusicFundo();
+        sound.MusicFundo();
 
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         ArrayList<Itens> itens = (ArrayList<Itens>) lerArquivoItens();
-        List<Itens> deusmeajude;
         ArrayList<Pedido> pedidos = new ArrayList<>();
         ArrayList<Ingredientes> ingredientes = new ArrayList<>();
 
@@ -203,10 +202,6 @@ public class Restaurante implements EnumsGerais {
                     break;
                 case 5:
                     //mostrarItens(itens);
-                    deusmeajude = lerArquivoItens();
-                    for (int i = 0; i < deusmeajude.size(); i++) {
-                        deusmeajude.get(i).mostrarItem();
-                    }
                     break;
                 case 6:
                     mostrarFuncionarios(funcionarios);
