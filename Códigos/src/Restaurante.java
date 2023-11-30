@@ -705,6 +705,7 @@ public class Restaurante implements EnumsGerais {
         List<Itens> objetos = lerArquivoItens();
 
         Iterator<Itens> iterator = objetos.iterator();
+        scanner.nextLine();
         while (iterator.hasNext()) {
             Itens objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
@@ -784,6 +785,7 @@ public class Restaurante implements EnumsGerais {
         List<Funcionario> objetos = lerArquivoFuncionario();
 
         Iterator<Funcionario> iterator = objetos.iterator();
+        scanner.nextLine();
         while (iterator.hasNext()) {
             Funcionario objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
@@ -863,6 +865,7 @@ public class Restaurante implements EnumsGerais {
         List<Ingredientes> objetos = lerArquivoIngredientes();
 
         Iterator<Ingredientes> iterator = objetos.iterator();
+        scanner.nextLine();
         while (iterator.hasNext()) {
             Ingredientes objeto = iterator.next();
             if (objeto.getNome().equals(nome)) {
