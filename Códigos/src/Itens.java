@@ -1,6 +1,12 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Itens {
+public abstract class Itens implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     protected String nome;
     protected double precoUnitario;
     protected double precoCusto;

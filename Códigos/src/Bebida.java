@@ -1,13 +1,17 @@
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class Bebida extends Itens {
-    private String tipoEmbalagem;
-    private String tamanhoEmbalagem;
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private EnumsGerais.EmbalagemBebidas tipoEmbalagem;
+    private double tamanhoEmbalagem;
 
     public Bebida () {
     }
 
-    public Bebida(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens, String tipoEmbalagem, String tamanhoEmbalagem) throws ErroCodigoException {
+    public Bebida(String nome, double precoUnitario, double precoCusto, ArrayList<Itens> listaDeItens, EnumsGerais.EmbalagemBebidas tipoEmbalagem, double tamanhoEmbalagem) throws ErroCodigoException {
         super(nome, precoUnitario, precoCusto, listaDeItens);
         this.tipoEmbalagem = tipoEmbalagem;
         this.tamanhoEmbalagem = tamanhoEmbalagem;
@@ -17,19 +21,19 @@ public class Bebida extends Itens {
         return nome;
     }
 
-    public String getTipoEmbalagem() {
+    public EnumsGerais.EmbalagemBebidas getTipoEmbalagem() {
         return tipoEmbalagem;
     }
 
-    public String getTamanhoEmbalagem() {
+    public double getTamanhoEmbalagem() {
         return tamanhoEmbalagem;
     }
 
-    public void setTipoEmbalagem(String tipoEmbalagem) {
+    public void setTipoEmbalagem(EnumsGerais.EmbalagemBebidas tipoEmbalagem) {
         this.tipoEmbalagem = tipoEmbalagem;
     }
 
-    public void setTamanhoEmbalagem(String tamanhoEmbalagem) {
+    public void setTamanhoEmbalagem(double tamanhoEmbalagem) {
         this.tamanhoEmbalagem = tamanhoEmbalagem;
     }
 

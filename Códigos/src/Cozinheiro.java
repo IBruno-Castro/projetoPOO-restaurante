@@ -8,7 +8,7 @@ public class Cozinheiro extends Funcionario{
     private int qtdSobremesa;
     private int qtdPrincipal;
 
-    public Cozinheiro(String nome, String endereco, EnumsFuncionarios.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
+    public Cozinheiro(String nome, String endereco, EnumsGerais.EstadoCivil estadoCivil, int nroCarteiraTrabalho, String cpf, String rg){
         super(nome, endereco, estadoCivil, nroCarteiraTrabalho, cpf, rg);
         qtdPrincipal = 0;
         qtdSobremesa = 0;
